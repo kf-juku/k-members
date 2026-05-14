@@ -90,6 +90,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 /* ========== メインコンテンツ ========== */
 #mainContent { display: none; }
 
+/* ========== 注意ポップアップ ========== */
+#noticeOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#noticeOverlay.show { display: flex; }
+.notice-popup {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px 24px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.notice-popup .notice-icon { font-size: 36px; margin-bottom: 12px; }
+.notice-popup h3 { font-size: 16px; font-weight: bold; color: #1a3a5c; margin-bottom: 12px; }
+.notice-popup p { font-size: 13px; color: #555; line-height: 1.8; margin-bottom: 20px; }
+.notice-popup button {
+  background: #1a3a5c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
 .site-header {
   background: #1a3a5c;
   color: white;
@@ -401,6 +435,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 <body>
 
 <!-- ========== ログイン画面 ========== -->
+<!-- 注意ポップアップ -->
+<div id="noticeOverlay">
+  <div class="notice-popup">
+    <div class="notice-icon">🔒</div>
+    <h3>ご利用にあたってのお願い</h3>
+    <p>このページは塾生・保護者の方専用です。<br>URLやパスワードの外部共有はお控えください。</p>
+    <button onclick="closeNotice()">確認しました</button>
+  </div>
+</div>
+
 <div id="loginScreen">
   <div class="login-card">
     <div class="login-logo">進学塾クロフネ</div>
@@ -504,8 +548,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
     <!-- 生徒向けタブ -->
     <div class="tab-panel" id="panelSeito">
       <div class="notice-box">
-        勉強の進め方・プリントなど生徒向けの資料を掲載しています。<br>
-        ご不明な点は先生に聞いてみてください。
+        勉強の進め方・プリントなど生徒向けの資料を掲載しています。
       </div>
       <div id="fileListSeito"></div>
     </div>
@@ -647,6 +690,15 @@ function showMain() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainContent').style.display = 'block';
   renderFiles();
+  // 初回ログイン時のみ注意ポップアップを表示
+  if (!sessionStorage.getItem('lib_notice_shown')) {
+    document.getElementById('noticeOverlay').classList.add('show');
+  }
+}
+
+function closeNotice() {
+  document.getElementById('noticeOverlay').classList.remove('show');
+  sessionStorage.setItem('lib_notice_shown', '1');
 }
 
 function toggleAcc(btn, gridId) {
