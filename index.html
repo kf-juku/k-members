@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>会員ページ</title>
+<title>進学塾クロフネ｜塾生・保護者専用ページ</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo', sans-serif; background: #f8f7f4; color: #333; min-height: 100vh; }
@@ -142,16 +142,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 .header-title { font-size: 16px; font-weight: bold; }
 .header-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
 .logout-btn {
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
   background: none;
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 6px;
-  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  padding: 8px 16px;
   cursor: pointer;
-  min-height: 36px;
+  min-height: 44px;
 }
-.logout-btn:hover { color: white; border-color: white; }
+.logout-btn:hover { color: white; border-color: white; background: rgba(255,255,255,0.1); }
 
 /* ========== タブ ========== */
 .tab-bar {
@@ -215,7 +215,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
   margin-bottom: 12px;
 }
 .category-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: #666;
   margin-bottom: 12px;
   line-height: 1.6;
@@ -231,10 +231,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
   display: flex;
   align-items: center;
   gap: 14px;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.file-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
 }
 .file-icon {
-  font-size: 28px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .file-info { flex: 1; min-width: 0; }
 .file-name {
@@ -276,6 +285,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
   color: white;
 }
 .btn-open:hover { background: #2d6a9f; }
+/* 生徒向けタブのボタンは緑 */
+#panelSeito .btn-open { background: #16a34a; }
+#panelSeito .btn-open:hover { background: #15803d; }
 .btn-dl {
   background: #f3f4f6;
   color: #444;
@@ -781,11 +793,11 @@ function renderTab(key, containerId) {
     } else {
       section.files.forEach(function(f) {
         html += '<div class="file-card">';
-        html += '<div class="file-icon">📄</div>';
+        html += '<div class="file-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#f0f4ff"/><path d="M9 6h9l6 6v14a1 1 0 01-1 1H9a1 1 0 01-1-1V7a1 1 0 011-1z" fill="#c7d4f0" stroke="#2d6a9f" stroke-width="1.5"/><path d="M18 6l6 6h-5a1 1 0 01-1-1V6z" fill="#2d6a9f"/><line x1="11" y1="15" x2="21" y2="15" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="18" x2="21" y2="18" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="21" x2="17" y2="21" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/></svg></div>';
         html += '<div class="file-info">';
         html += '<div class="file-name">' + esc(f.name) + '</div>';
         if (f.desc) html += '<div class="file-desc">' + esc(f.desc) + '</div>';
-        html += '<div class="file-date">更新日：' + esc(f.date) + '</div>';
+        html += '<div class="file-date">更新日：' + formatDate(f.date) + '</div>';
         html += '</div>';
         html += '<div class="file-actions">';
         if (f.disabled) {
@@ -807,6 +819,12 @@ function renderTab(key, containerId) {
 
 function esc(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function formatDate(str) {
+  if (!str) return '';
+  var parts = str.split('-');
+  if (parts.length !== 3) return str;
+  return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
 }
 
 // ========== タブ切り替え ==========
