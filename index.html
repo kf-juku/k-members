@@ -127,7 +127,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 .site-header {
   background: #1a3a5c;
   color: white;
-  padding: 16px 20px;
+  padding: 10px 16px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -138,27 +138,36 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
-.header-title { font-size: 16px; font-weight: bold; }
-.header-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+.header-title { font-size: 15px; font-weight: bold; }
+.header-sub { font-size: 11px; opacity: 0.7; margin-top: 1px; }
+.header-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .logout-btn {
   font-size: 13px;
   color: rgba(255,255,255,0.8);
   background: none;
   border: 1px solid rgba(255,255,255,0.4);
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 8px 12px;
   cursor: pointer;
   min-height: 44px;
+  white-space: nowrap;
 }
 .logout-btn:hover { color: white; border-color: white; background: rgba(255,255,255,0.1); }
+/* スマホでは「お知らせ」テキストを非表示にしてアイコンのみ */
+.bell-label { display: inline; }
+@media (max-width: 400px) {
+  .bell-label { display: none; }
+  .bell-btn { padding: 8px 10px; }
+}
 
 /* ========== タブ ========== */
 .tab-bar {
   background: white;
   border-bottom: 2px solid #e8e8e8;
   position: sticky;
-  top: 57px;
+  top: 52px;
   z-index: 90;
 }
 .tab-inner {
@@ -205,41 +214,64 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 }
 
 /* カテゴリセクション */
-.category-section { margin-bottom: 32px; }
+.category-section { margin-bottom: 20px; }
 .category-title {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
-  color: #1a3a5c;
-  padding: 8px 0 8px 12px;
-  border-left: 4px solid #1a3a5c;
-  margin-bottom: 12px;
+  color: #555;
+  padding: 5px 0 5px 10px;
+  border-left: 3px solid #b0bccf;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
 }
 .category-desc {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 12px;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
   line-height: 1.6;
 }
+
+/* 横並びボタン形式（学年別など） */
+.grade-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+.grade-btn {
+  flex: 1;
+  min-width: 72px;
+  padding: 10px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: #16a34a;
+  color: #fff;
+  min-height: 44px;
+  transition: background 0.15s;
+}
+.grade-btn:hover { background: #15803d; }
+.grade-btn.disabled { background: #ccc; cursor: not-allowed; }
 
 /* ファイルカード */
 .file-card {
   background: white;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
-  gap: 14px;
-  transition: box-shadow 0.2s, transform 0.15s;
+  gap: 10px;
+  transition: box-shadow 0.15s;
 }
-.file-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  transform: translateY(-1px);
-}
+.file-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
 .file-icon {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -247,19 +279,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 }
 .file-info { flex: 1; min-width: 0; }
 .file-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   color: #222;
-  margin-bottom: 3px;
+  margin-bottom: 1px;
   line-height: 1.4;
 }
 .file-desc {
-  font-size: 12px;
-  color: #777;
-  margin-bottom: 4px;
-  line-height: 1.5;
+  font-size: 11px;
+  color: #999;
+  line-height: 1.4;
 }
-.file-date { font-size: 11px; color: #bbb; }
+.file-date { font-size: 11px; color: #ccc; margin-top: 1px; }
 .file-actions {
   display: flex;
   gap: 8px;
@@ -364,6 +395,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 .accordion-body { display: none; margin-bottom: 8px; }
 .accordion-body.open { display: block; }
 
+/* 内側アコーディオン（教室 > 塾種別） */
+.accordion-btn-inner {
+  width: 100%; text-align: left;
+  background: #fff; border: 1px solid #d8e2f0;
+  border-radius: 8px; padding: 11px 16px;
+  font-size: 14px; font-weight: bold; color: #1a3a5c;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 8px;
+  transition: background 0.2s;
+}
+.accordion-btn-inner:hover { background: #f4f6fa; }
+.accordion-btn-inner .acc-arrow { font-size: 11px; transition: transform 0.25s; }
+.accordion-btn-inner.open .acc-arrow { transform: rotate(180deg); }
+.accordion-body-inner { display: none; margin-bottom: 4px; padding-left: 8px; }
+.accordion-body-inner.open { display: block; }
+
 .tt-wrap { margin-bottom: 36px; }
 .tt-title {
   font-size: 16px; font-weight: bold; color: white;
@@ -377,8 +424,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 }
 .tt-grid {
   display: grid;
-  grid-template-columns: 48px repeat(6, 1fr);
-  min-width: 520px;
+  grid-template-columns: 44px repeat(6, minmax(72px, 1fr));
+  min-width: 480px;
   position: relative;
 }
 .hd-day {
@@ -394,13 +441,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
   border-right: 2px solid #b0bccf;
   display: flex; align-items: flex-start; justify-content: center;
   padding-top: 6px;
-  font-size: 13px; font-weight: bold; color: #1a3a5c;
-  height: 120px;
+  font-size: 11px; font-weight: bold; color: #1a3a5c;
+  height: 140px;
 }
 .day-lane {
   border-top: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
-  height: 120px;
+  height: 140px;
   position: relative;
   z-index: 0;
 }
@@ -413,19 +460,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 }
 .slot {
   position: absolute;
-  left: 3px; right: 3px;
-  border-radius: 8px;
-  padding: 8px;
-  line-height: 1.5;
-  font-size: 12px;
-  display: flex; flex-direction: column; justify-content: center;
+  left: 2px; right: 2px;
+  border-radius: 6px;
+  padding: 4px 5px;
+  line-height: 1.4;
+  font-size: 11px;
+  display: flex; flex-direction: column; justify-content: flex-start;
   overflow: hidden;
   z-index: 10;
+  word-break: break-all;
 }
-.slot-time  { font-size: 12px; font-weight: bold; display: block; }
-.slot-dur   { font-size: 11px; display: block; opacity: 0.75; margin-bottom: 2px; }
-.slot-grade { font-size: 12px; font-weight: bold; display: block; }
-.slot-name  { font-size: 12px; font-weight: bold; display: block; }
+.slot-time  { font-size: 11px; font-weight: bold; display: block; white-space: nowrap; }
+.slot-dur   { font-size: 10px; display: block; opacity: 0.75; }
+.slot-grade { font-size: 11px; font-weight: bold; display: block; }
+.slot-name  { font-size: 11px; font-weight: bold; display: block; }
 .s-juku  { background: #fffbf0; border: 2px solid #c49a1a; color: #6b4f00; }
 .s-sho   { background: #fff7ed; border: 2px solid #f97316; color: #7c2d12; }
 .s-mix   { background: #f0f9ff; border: 2px solid #0284c7; color: #0c4a6e; }
@@ -442,6 +490,176 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 .legend-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
 .legend-color { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
+
+/* ========== 生徒向け：教科ジャンプバー ========== */
+.subject-jump-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 0 18px;
+}
+.subject-jump-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  background: #2d5a8e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  min-height: 36px;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.subject-jump-btn:hover { background: #1a3a5c; }
+
+/* 教科見出し */
+.subject-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  background: #1a3a5c;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  margin-top: 24px;
+  scroll-margin-top: 110px;
+}
+.subject-heading:first-of-type { margin-top: 4px; }
+.subject-heading .subject-icon { font-size: 16px; }
+
+/* ========== プレテスト ========== */
+.pt-grade-acc { margin-bottom: 8px; border: 0.5px solid #c8d4e4; border-radius: 10px; overflow: hidden; }
+.pt-grade-btn {
+  width: 100%; text-align: left; background: #f4f6fa;
+  border: none; padding: 12px 16px; font-size: 14px; font-weight: bold;
+  color: #1a3a5c; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+}
+.pt-grade-btn:hover { background: #e8eef7; }
+.pt-grade-btn .pt-arrow { font-size: 12px; transition: transform 0.25s; }
+.pt-grade-btn.open .pt-arrow { transform: rotate(180deg); }
+.pt-grade-body { display: none; padding: 10px 12px; background: #fff; }
+.pt-grade-body.open { display: block; }
+.pt-term-card { background: #f8f9fc; border: 0.5px solid #dde3ed; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+.pt-term-title { font-size: 13px; font-weight: bold; color: #1a3a5c; margin-bottom: 8px; }
+.pt-btn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.pt-subject { display: flex; flex-direction: column; gap: 4px; }
+.pt-subject-name { font-size: 11px; color: #888; text-align: center; }
+.pt-btn-pair { display: flex; flex-direction: column; gap: 4px; }
+.pt-btn {
+  font-size: 11px; font-weight: bold; padding: 7px 4px; border-radius: 6px;
+  border: none; cursor: pointer; text-align: center; width: 100%;
+}
+.pt-btn.q { background: #1a3a5c; color: #fff; }
+.pt-btn.q:hover { background: #2d6a9f; }
+.pt-btn.a { background: #f0f4fa; color: #1a3a5c; border: 1px solid #c8d4e4; }
+.pt-btn.a:hover { background: #e0e8f5; }
+
+/* ========== お知らせボタン・ドロップダウン ========== */
+.bell-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 0.2s;
+  position: relative;
+}
+.bell-btn:hover { background: rgba(255,255,255,0.25); }
+.bell-btn svg { flex-shrink: 0; }
+.bell-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: #f87171;
+  border-radius: 50%;
+  display: none;
+}
+.bell-dot.active { display: block; }
+
+/* ドロップダウン：fixed配置でスマホでもはみ出さない */
+#bellMenu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  right: 12px;
+  left: 12px;
+  max-width: 360px;
+  margin-left: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  z-index: 500;
+  overflow: hidden;
+}
+#bellMenu.open { display: block; }
+.bell-menu-header {
+  background: #1a3a5c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bell-menu-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.info-item {
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+.info-item-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.info-date {
+  color: #aaa;
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.info-badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.info-badge.new { background: #fee2e2; color: #dc2626; }
+.info-badge.update { background: #dbeafe; color: #1d4ed8; }
+.info-badge.notice { background: #fef9c3; color: #92400e; }
+.info-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+.info-tab-badge {
+  font-size: 11px; font-weight: bold; padding: 2px 7px;
+  border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+}
+.info-tab-badge.hogo { background: #dbeafe; color: #1d4ed8; }
+.info-tab-badge.seito { background: #dcfce7; color: #166534; }
 </style>
 </head>
 <body>
@@ -483,7 +701,48 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
         <div class="header-title">進学塾クロフネ</div>
         <div class="header-sub">塾生・保護者専用ページ</div>
       </div>
-      <button class="logout-btn" onclick="logout()">ログアウト</button>
+      <div class="header-right">
+        <button class="bell-btn" onclick="toggleBellMenu()" id="bellBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6V11c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/>
+          </svg>
+          <span class="bell-label">お知らせ</span>
+          <span class="bell-dot" id="bellDot"></span>
+        </button>
+        <div id="bellMenu">
+          <div class="bell-menu-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6V11c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
+            お知らせ・更新情報
+          </div>
+          <div class="bell-menu-list">
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-05-16</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">プレテスト（中1〜中3）を追加しました。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-05-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">NEW HORIZON 英単語テスト（中1〜中3）を追加しました。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-05-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">NEW HORIZON 教科書和訳（中1〜中3）を追加しました。</div>
+            </div>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">ログアウト</button>
+      </div>
     </div>
   </header>
 
@@ -494,63 +753,87 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
     </div>
   </div>
 
+  <!-- お知らせバナー -->
+
   <div class="content-wrap">
 
     <!-- 保護者向けタブ -->
     <div class="tab-panel active" id="panelHogo">
-      <div class="notice-box">
-        規約・コース案内など保護者向けの資料を掲載しています。<br>
-        ご不明な点は公式LINEよりお問い合わせください。
-      </div>
 
-      <!-- 時間割（学習塾） -->
-      <div class="legend-wrap">
-        <div class="legend-item"><div class="legend-color" style="background:#fff7ed;border:2px solid #f97316;"></div>小2〜4年生</div>
-        <div class="legend-item"><div class="legend-color" style="background:#f0f9ff;border:2px solid #0284c7;"></div>小5,6年生・中学生</div>
-        <div class="legend-item"><div class="legend-color" style="background:#fffbf0;border:2px solid #c49a1a;"></div>中学生</div>
-        <div class="legend-item"><div class="legend-color" style="background:#f0fdf4;border:2px solid #16a34a;"></div>土曜演習回</div>
-        <div class="legend-item"><div class="legend-color" style="background:#fff0f2;border:2px solid #e11d48;"></div>英検対策講座</div>
-        <div class="legend-item"><div class="legend-color" style="background:#f3f0ff;border:2px solid #7c3aed;"></div>受験特訓講座</div>
-      </div>
-      <button class="accordion-btn" onclick="toggleAcc(this, 'juku-kita')">
-        🏫 クロフネ　北久里浜校　時間割 <span class="acc-arrow">▼</span>
-      </button>
-      <div class="accordion-body">
-        <div class="tt-wrap">
-          <div class="tt-outer"><div class="tt-grid" id="juku-kita"></div></div>
-          <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
-        </div>
-      </div>
-      <button class="accordion-btn" onclick="toggleAcc(this, 'juku-keikyu')">
-        🏫 クロフネ　京急久里浜校　時間割 <span class="acc-arrow">▼</span>
-      </button>
-      <div class="accordion-body">
-        <div class="tt-wrap">
-          <div class="tt-outer"><div class="tt-grid" id="juku-keikyu"></div></div>
-          <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
-        </div>
-      </div>
+      <!-- 時間割セクション -->
+      <div class="category-section">
+        <div class="category-title">時間割</div>
 
-      <!-- 時間割（CA） -->
-      <div class="legend-wrap" style="margin-top:8px;">
-        <div class="legend-item"><div class="legend-color" style="background:#eff6ff;border:2px solid #2563eb;"></div>コードアドベンチャー</div>
-      </div>
-      <button class="accordion-btn" onclick="toggleAcc(this, 'ca-kita')">
-        💻 コードアドベンチャー　北久里浜校　時間割 <span class="acc-arrow">▼</span>
-      </button>
-      <div class="accordion-body">
-        <div class="tt-wrap">
-          <div class="tt-outer"><div class="tt-grid" id="ca-kita"></div></div>
-          <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+        <!-- 北久里浜校 -->
+        <button class="accordion-btn" onclick="toggleAccSimple(this)">
+          北久里浜校 <span class="acc-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          <button class="accordion-btn-inner" onclick="toggleAcc(this, 'juku-kita')">
+            クロフネ <span class="acc-arrow">▼</span>
+          </button>
+          <div class="accordion-body-inner">
+            <div class="legend-wrap" style="margin-bottom:10px;">
+              <div class="legend-item"><div class="legend-color" style="background:#fff7ed;border:2px solid #f97316;"></div>小2〜4年生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f0f9ff;border:2px solid #0284c7;"></div>小5,6年生・中学生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#fffbf0;border:2px solid #c49a1a;"></div>中学生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f0fdf4;border:2px solid #16a34a;"></div>土曜演習回</div>
+              <div class="legend-item"><div class="legend-color" style="background:#fff0f2;border:2px solid #e11d48;"></div>英検対策講座</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f3f0ff;border:2px solid #7c3aed;"></div>受験特訓講座</div>
+            </div>
+            <div class="tt-wrap">
+              <div class="tt-outer"><div class="tt-grid" id="juku-kita"></div></div>
+              <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+            </div>
+          </div>
+          <button class="accordion-btn-inner" onclick="toggleAcc(this, 'ca-kita')">
+            コードアドベンチャー <span class="acc-arrow">▼</span>
+          </button>
+          <div class="accordion-body-inner">
+            <div class="legend-wrap" style="margin-bottom:10px;">
+              <div class="legend-item"><div class="legend-color" style="background:#eff6ff;border:2px solid #2563eb;"></div>コードアドベンチャー</div>
+            </div>
+            <div class="tt-wrap">
+              <div class="tt-outer"><div class="tt-grid" id="ca-kita"></div></div>
+              <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <button class="accordion-btn" onclick="toggleAcc(this, 'ca-keikyu')">
-        💻 コードアドベンチャー　京急久里浜校　時間割 <span class="acc-arrow">▼</span>
-      </button>
-      <div class="accordion-body">
-        <div class="tt-wrap">
-          <div class="tt-outer"><div class="tt-grid" id="ca-keikyu"></div></div>
-          <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+
+        <!-- 京急久里浜校 -->
+        <button class="accordion-btn" onclick="toggleAccSimple(this)">
+          京急久里浜校 <span class="acc-arrow">▼</span>
+        </button>
+        <div class="accordion-body">
+          <button class="accordion-btn-inner" onclick="toggleAcc(this, 'juku-keikyu')">
+            クロフネ <span class="acc-arrow">▼</span>
+          </button>
+          <div class="accordion-body-inner">
+            <div class="legend-wrap" style="margin-bottom:10px;">
+              <div class="legend-item"><div class="legend-color" style="background:#fff7ed;border:2px solid #f97316;"></div>小2〜4年生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f0f9ff;border:2px solid #0284c7;"></div>小5,6年生・中学生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#fffbf0;border:2px solid #c49a1a;"></div>中学生</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f0fdf4;border:2px solid #16a34a;"></div>土曜演習回</div>
+              <div class="legend-item"><div class="legend-color" style="background:#fff0f2;border:2px solid #e11d48;"></div>英検対策講座</div>
+              <div class="legend-item"><div class="legend-color" style="background:#f3f0ff;border:2px solid #7c3aed;"></div>受験特訓講座</div>
+            </div>
+            <div class="tt-wrap">
+              <div class="tt-outer"><div class="tt-grid" id="juku-keikyu"></div></div>
+              <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+            </div>
+          </div>
+          <button class="accordion-btn-inner" onclick="toggleAcc(this, 'ca-keikyu')">
+            コードアドベンチャー <span class="acc-arrow">▼</span>
+          </button>
+          <div class="accordion-body-inner">
+            <div class="legend-wrap" style="margin-bottom:10px;">
+              <div class="legend-item"><div class="legend-color" style="background:#eff6ff;border:2px solid #2563eb;"></div>コードアドベンチャー</div>
+            </div>
+            <div class="tt-wrap">
+              <div class="tt-outer"><div class="tt-grid" id="ca-keikyu"></div></div>
+              <div class="tt-note">※授業の最後5分は家庭学習の整理や片付けの時間となります。</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -559,9 +842,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 
     <!-- 生徒向けタブ -->
     <div class="tab-panel" id="panelSeito">
-      <div class="notice-box">
-        勉強の進め方・プリントなど生徒向けの資料を掲載しています。
-      </div>
       <div id="fileListSeito"></div>
     </div>
 
@@ -579,7 +859,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Meiryo'
 
 <script>
 // ========== 時間割グリッド ==========
-var TT_START = 16, TT_END = 22, CA_START = 15, CA_END = 19, HOUR_PX = 120;
+var TT_START = 16, TT_END = 22, CA_START = 15, CA_END = 19, HOUR_PX = 140;
 var TT_DAYS = ['月','火','水','木','金','土'];
 var TT_DATA = {
   'juku-keikyu': [
@@ -702,6 +982,7 @@ function showMain() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainContent').style.display = 'block';
   renderFiles();
+  initBellDot();
   // 初回ログイン時のみ注意ポップアップを表示
   if (!sessionStorage.getItem('lib_notice_shown')) {
     document.getElementById('noticeOverlay').classList.add('show');
@@ -714,6 +995,7 @@ function closeNotice() {
 }
 
 function toggleAcc(btn, gridId) {
+  // 内側アコーディオン対応：次の兄弟が accordion-body-inner の場合も考慮
   var body = btn.nextElementSibling;
   var isOpen = body.classList.contains('open');
   body.classList.toggle('open', !isOpen);
@@ -724,6 +1006,13 @@ function toggleAcc(btn, gridId) {
     buildTT(gridId, isCA ? CA_START : TT_START, isCA ? CA_END : TT_END);
     ttBuilt[gridId] = true;
   }
+}
+
+function toggleAccSimple(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
 
 function logout() {
@@ -744,30 +1033,107 @@ var FILES = {
       desc: '入会ガイド・コース案内・各種規約などの資料です。',
       files: [
         { name: '入会ガイドブック',    desc: '入会時の説明資料',                       date: '2026-02-19', path: 'pdf/hogo/nyukai-guide.pdf',    download: true },
-        { name: '中学生コース案内',    desc: '準備中', date: '2025-11-04', path: '', download: false, disabled: true },
-        { name: '受験特訓コース案内',  desc: '準備中', date: '2026-04-24', path: '', download: false, disabled: true },
+        { name: '中学生コース案内',    desc: '',       date: '2025-11-04', path: '', download: false, disabled: true },
+        { name: '受験特訓コース案内',  desc: '',       date: '2026-04-24', path: '', download: false, disabled: true },
       ]
     },
   ],
 
   // ---- 生徒向け ----
+  // subject: 教科グループ名（ジャンプバーに表示）
+  // icon: 教科アイコン（絵文字）
+  // id: ジャンプ先のアンカーID
+  // categories: この教科に属するカテゴリ一覧
   seito: [
     {
-      category: '英語｜NEW HORIZON 教科書和訳',
-      desc: 'NEW HORIZONの教科書和訳です。予習・復習に活用してください。',
-      files: [
-        { name: 'NEW HORIZON 中1 和訳', desc: 'NEW HORIZON English Course 1', date: '2026-05-15', path: 'pdf/seito/english-nh-grade1.pdf', download: false },
-        { name: 'NEW HORIZON 中2 和訳', desc: 'NEW HORIZON English Course 2', date: '2026-05-15', path: 'pdf/seito/english-nh-grade2.pdf', download: false },
-        { name: 'NEW HORIZON 中3 和訳', desc: 'NEW HORIZON English Course 3', date: '2026-05-15', path: 'pdf/seito/english-nh-grade3.pdf', download: false },
+      subject: '英語',
+      icon: '📘',
+      id: 'subj-english',
+      categories: [
+        {
+          category: 'NEW HORIZON 教科書和訳',
+          desc: '予習・復習に活用してください。',
+          gradeButtons: true,
+          files: [
+            { name: '中1', path: 'pdf/seito/english-nh-grade1.pdf', download: false },
+            { name: '中2', path: 'pdf/seito/english-nh-grade2.pdf', download: false },
+            { name: '中3', path: 'pdf/seito/english-nh-grade3.pdf', download: false },
+          ]
+        },
+        {
+          category: 'NEW HORIZON 英単語テスト',
+          desc: 'ノートに答えを書いて暗記に活用してください。',
+          gradeButtons: true,
+          files: [
+            { name: '中1', path: 'pdf/seito/english-nh-words-grade1.pdf', download: false },
+            { name: '中2', path: 'pdf/seito/english-nh-words-grade2.pdf', download: false },
+            { name: '中3', path: 'pdf/seito/english-nh-words-grade3.pdf', download: false },
+          ]
+        },
+        {
+          category: 'ぐるぐる英作文',
+          desc: '単元ごとに繰り返し練習できるプリントです。',
+          guruguru: true,
+          grades: [
+            { grade: '中1', units: [] },
+            { grade: '中2', units: [] },
+            { grade: '中3', units: [] },
+          ]
+        },
       ]
     },
     {
-      category: '英語｜NEW HORIZON 英単語テスト',
-      desc: '教科書の英単語を自分でテストして暗記するためのプリントです。ノートに答えを書いて使ってください。',
-      files: [
-        { name: 'NEW HORIZON 中1 英単語テスト', desc: 'NEW HORIZON English Course 1', date: '2026-05-15', path: 'pdf/seito/english-nh-words-grade1.pdf', download: false },
-        { name: 'NEW HORIZON 中2 英単語テスト', desc: 'NEW HORIZON English Course 2', date: '2026-05-15', path: 'pdf/seito/english-nh-words-grade2.pdf', download: false },
-        { name: 'NEW HORIZON 中3 英単語テスト', desc: 'NEW HORIZON English Course 3', date: '2026-05-15', path: 'pdf/seito/english-nh-words-grade3.pdf', download: false },
+      subject: '数学',
+      icon: '📐',
+      id: 'subj-math',
+      categories: [
+        {
+          category: 'ぐるぐる数学',
+          desc: '単元ごとに繰り返し練習できるプリントです。',
+          guruguru: true,
+          grades: [
+            { grade: '中1', units: [] },
+            { grade: '中2', units: [] },
+            { grade: '中3', units: [] },
+          ]
+        },
+      ]
+    },
+    {
+      subject: 'テスト対策',
+      icon: '🎯',
+      id: 'subj-test',
+      categories: [
+        {
+          category: 'プレテスト',
+          desc: '定期テスト前に取り組むプレテストです。科目ごとに問題・解答解説があります。',
+          pretest: true,
+          grades: [
+            {
+              grade: '中1', terms: [
+                { term: '前期中間', base: 'pdf/seito/pretest-grade1-term1' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade1-term2' },
+                { term: '後期中間', base: 'pdf/seito/pretest-grade1-term3' },
+                { term: '学年末',   base: 'pdf/seito/pretest-grade1-term4' },
+              ]
+            },
+            {
+              grade: '中2', terms: [
+                { term: '前期中間', base: 'pdf/seito/pretest-grade2-term1' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade2-term2' },
+                { term: '後期中間', base: 'pdf/seito/pretest-grade2-term3' },
+                { term: '学年末',   base: 'pdf/seito/pretest-grade2-term4' },
+              ]
+            },
+            {
+              grade: '中3', terms: [
+                { term: '前期中間', base: 'pdf/seito/pretest-grade3-term1' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade3-term2' },
+                { term: '後期中間', base: 'pdf/seito/pretest-grade3-term3' },
+              ]
+            },
+          ]
+        },
       ]
     },
   ]
@@ -780,41 +1146,190 @@ function renderFiles() {
   renderTab('seito', 'fileListSeito');
 }
 
-function renderTab(key, containerId) {
-  var sections = FILES[key] || [];
-  var html = '';
-  sections.forEach(function(section) {
-    html += '<div class="category-section">';
-    html += '<div class="category-title">' + esc(section.category) + '</div>';
-    if (section.desc) html += '<div class="category-desc">' + esc(section.desc) + '</div>';
+function renderFileCard(f) {
+  var html = '<div class="file-card">';
+  html += '<div class="file-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4h9l5 5v14a1 1 0 01-1 1H7a1 1 0 01-1-1V5a1 1 0 011-1z" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1"/><path d="M16 4l5 5h-4a1 1 0 01-1-1V4z" fill="#d1d5db"/><text x="14" y="19" font-size="5" font-weight="bold" fill="#9ca3af" text-anchor="middle" font-family="Arial,sans-serif">PDF</text></svg></div>';
+  html += '<div class="file-info">';
+  html += '<div class="file-name">' + esc(f.name) + '</div>';
+  if (f.desc) html += '<div class="file-desc">' + esc(f.desc) + '</div>';
+  html += '<div class="file-date">更新日：' + formatDate(f.date) + '</div>';
+  html += '</div>';
+  html += '<div class="file-actions">';
+  if (f.disabled) {
+    html += '<button class="btn-open" disabled style="background:#ccc;cursor:not-allowed;">準備中</button>';
+  } else if (f.download) {
+    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', true, \'' + esc(f.name) + '\')">開く</button>';
+    html += '<a class="btn-dl" href="' + f.path + '" download>保存</a>';
+  } else {
+    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', false, \'' + esc(f.name) + '\')">開く</button>';
+  }
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
 
-    if (!section.files || section.files.length === 0) {
-      html += '<div style="color:#bbb;font-size:13px;padding:12px 0;">準備中です。もうしばらくお待ちください。</div>';
+function renderPretestSection(section) {
+  var html = '';
+  var subjects = [
+    { key: 'english', label: '英語' },
+    { key: 'math',    label: '数学' },
+    { key: 'science', label: '理科' },
+    { key: 'social',  label: '社会' },
+  ];
+  section.grades.forEach(function(g) {
+    html += '<div class="pt-grade-acc">';
+    html += '<button class="pt-grade-btn" onclick="togglePtGrade(this)">' + esc(g.grade) + '<span class="pt-arrow">▼</span></button>';
+    html += '<div class="pt-grade-body">';
+    if (!g.terms || g.terms.length === 0) {
+      html += '<div style="color:#bbb;font-size:13px;padding:8px 4px;">準備中です。もうしばらくお待ちください。</div>';
     } else {
-      section.files.forEach(function(f) {
-        html += '<div class="file-card">';
-        html += '<div class="file-icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" rx="6" fill="#f0f4ff"/><path d="M9 6h9l6 6v14a1 1 0 01-1 1H9a1 1 0 01-1-1V7a1 1 0 011-1z" fill="#c7d4f0" stroke="#2d6a9f" stroke-width="1.5"/><path d="M18 6l6 6h-5a1 1 0 01-1-1V6z" fill="#2d6a9f"/><line x1="11" y1="15" x2="21" y2="15" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="18" x2="21" y2="18" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="21" x2="17" y2="21" stroke="#2d6a9f" stroke-width="1.5" stroke-linecap="round"/></svg></div>';
-        html += '<div class="file-info">';
-        html += '<div class="file-name">' + esc(f.name) + '</div>';
-        if (f.desc) html += '<div class="file-desc">' + esc(f.desc) + '</div>';
-        html += '<div class="file-date">更新日：' + formatDate(f.date) + '</div>';
-        html += '</div>';
-        html += '<div class="file-actions">';
-        if (f.disabled) {
-          html += '<button class="btn-open" disabled style="background:#ccc;cursor:not-allowed;">準備中</button>';
-        } else if (f.download) {
-          html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', true, \'' + esc(f.name) + '\')">開く</button>';
-          html += '<a class="btn-dl" href="' + f.path + '" download>保存</a>';
+      g.terms.forEach(function(t) {
+        html += '<div class="pt-term-card">';
+        html += '<div class="pt-term-title">' + esc(t.term) + '</div>';
+        if (!t.base) {
+          html += '<div style="color:#bbb;font-size:12px;padding:4px 0;">準備中です。</div>';
         } else {
-          html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', false, \'' + esc(f.name) + '\')">開く</button>';
+          html += '<div class="pt-btn-grid">';
+          subjects.forEach(function(s) {
+            html += '<div class="pt-subject">';
+            html += '<div class="pt-subject-name">' + esc(s.label) + '</div>';
+            html += '<button class="pt-btn q" onclick="openPdf(\'' + t.base + '-' + s.key + '-q.pdf\', false, \'' + esc(g.grade + ' ' + t.term + ' ' + s.label + ' 問題') + '\')">問題</button>';
+            html += '<button class="pt-btn a" onclick="openPdf(\'' + t.base + '-' + s.key + '-a.pdf\', false, \'' + esc(g.grade + ' ' + t.term + ' ' + s.label + ' 解答') + '\')">解答</button>';
+            html += '</div>';
+          });
+          html += '</div>';
         }
-        html += '</div>';
         html += '</div>';
       });
     }
-    html += '</div>';
+    html += '</div></div>';
   });
+  return html;
+}
+
+function renderGururuSection(section) {
+  var html = '';
+  section.grades.forEach(function(g, gi) {
+    var bodyId = 'gg-' + gi + '-' + Math.random().toString(36).slice(2,6);
+    html += '<div class="pt-grade-acc">';
+    html += '<button class="pt-grade-btn" onclick="togglePtGrade(this)">' + esc(g.grade) + '<span class="pt-arrow">▼</span></button>';
+    html += '<div class="pt-grade-body">';
+    if (!g.units || g.units.length === 0) {
+      html += '<div style="color:#bbb;font-size:13px;padding:8px 4px;">準備中です。もうしばらくお待ちください。</div>';
+    } else {
+      g.units.forEach(function(u) {
+        html += '<div class="file-card">';
+        html += '<div class="file-info"><div class="file-name">' + esc(u.name) + '</div></div>';
+        html += '<div class="file-actions">';
+        html += '<button class="btn-open" onclick="openPdf(\'' + u.path + '\', false, \'' + esc(g.grade + ' ' + u.name) + '\')">開く</button>';
+        html += '</div></div>';
+      });
+    }
+    html += '</div></div>';
+  });
+  return html;
+}
+
+function renderCategoryBlock(section) {
+  var html = '<div class="category-section">';
+  html += '<div class="category-title">' + esc(section.category) + '</div>';
+  if (section.desc) html += '<div class="category-desc">' + esc(section.desc) + '</div>';
+  if (section.pretest) {
+    html += renderPretestSection(section);
+  } else if (section.guruguru) {
+    html += renderGururuSection(section);
+  } else if (section.gradeButtons) {
+    // 横並びボタン形式
+    html += '<div class="grade-btn-row">';
+    section.files.forEach(function(f) {
+      if (f.disabled || !f.path) {
+        html += '<button class="grade-btn disabled" disabled>' + esc(f.name) + '（準備中）</button>';
+      } else {
+        html += '<button class="grade-btn" onclick="openPdf(\'' + f.path + '\', ' + (f.download ? 'true' : 'false') + ', \'' + esc(section.category + ' ' + f.name) + '\')">' + esc(f.name) + '</button>';
+      }
+    });
+    html += '</div>';
+  } else if (!section.files || section.files.length === 0) {
+    html += '<div style="color:#bbb;font-size:13px;padding:12px 0;">準備中です。もうしばらくお待ちください。</div>';
+  } else {
+    section.files.forEach(function(f) { html += renderFileCard(f); });
+  }
+  html += '</div>';
+  return html;
+}
+
+// 教科ごとのSVGアイコン（色違い）
+var SUBJECT_ICONS = {
+  'subj-english': '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" fill="#bfdbfe"/><rect x="3" y="4" width="18" height="5" rx="2" fill="#3b82f6"/><line x1="7" y1="13" x2="17" y2="13" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="16" x2="13" y2="16" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  'subj-math':    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#bbf7d0"/><line x1="8" y1="12" x2="16" y2="12" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="8" x2="12" y2="16" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/></svg>',
+  'subj-test':    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#fde68a"/><path d="M12 7v5l3 3" stroke="#d97706" stroke-width="2" stroke-linecap="round"/></svg>',
+};
+var SUBJECT_ICON_DEFAULT = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" fill="#e5e7eb"/><line x1="7" y1="9" x2="17" y2="9" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="13" x2="17" y2="13" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="17" x2="13" y2="17" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+function getSubjectIcon(id) {
+  return SUBJECT_ICONS[id] || SUBJECT_ICON_DEFAULT;
+}
+
+function renderTab(key, containerId) {
+  var data = FILES[key] || [];
+  var html = '';
+
+  if (key === 'seito') {
+    // ジャンプバー
+    html += '<div class="subject-jump-bar">';
+    data.forEach(function(subj) {
+      html += '<a class="subject-jump-btn" href="#' + subj.id + '">' + getSubjectIcon(subj.id) + ' ' + esc(subj.subject) + '</a>';
+    });
+    html += '</div>';
+
+    // 教科ブロック
+    data.forEach(function(subj) {
+      html += '<div id="' + subj.id + '" class="subject-heading">';
+      html += '<span class="subject-icon">' + getSubjectIcon(subj.id) + '</span>' + esc(subj.subject);
+      html += '</div>';
+      subj.categories.forEach(function(section) {
+        html += renderCategoryBlock(section);
+      });
+    });
+  } else {
+    // 保護者向けは従来通り
+    data.forEach(function(section) { html += renderCategoryBlock(section); });
+  }
+
   document.getElementById(containerId).innerHTML = html;
+}
+
+function toggleBellMenu() {
+  var menu = document.getElementById('bellMenu');
+  var dot = document.getElementById('bellDot');
+  var isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  if (!isOpen) {
+    // 開いたら既読にする
+    dot.classList.remove('active');
+    sessionStorage.setItem('lib_bell_read', '1');
+  }
+}
+document.addEventListener('click', function(e) {
+  var bell = document.getElementById('bellBtn');
+  var menu = document.getElementById('bellMenu');
+  if (bell && menu && !bell.contains(e.target) && !menu.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+function initBellDot() {
+  // 未読ならドットを表示
+  if (!sessionStorage.getItem('lib_bell_read')) {
+    var dot = document.getElementById('bellDot');
+    if (dot) dot.classList.add('active');
+  }
+}
+
+function togglePtGrade(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
 
 function esc(str) {
@@ -838,13 +1353,8 @@ function switchTab(tab) {
 
 // ========== PDF表示 ==========
 function openPdf(path, allowDownload, name) {
-  if (allowDownload) {
-    window.open(path, '_blank');
-  } else {
-    document.getElementById('pdfModalTitle').textContent = name || '資料を表示中';
-    document.getElementById('pdfFrame').src = path;
-    document.getElementById('pdfOverlay').classList.add('show');
-  }
+  // iOSのSafariはiframe内PDFを表示できないため、すべて別タブで開く
+  window.open(path, '_blank');
 }
 
 function closePdfModal() {
