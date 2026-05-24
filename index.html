@@ -1112,24 +1112,24 @@ var FILES = {
             {
               grade: '中1', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade1-term1' },
-                { term: '前期期末', base: 'pdf/seito/pretest-grade1-term2' },
-                { term: '後期中間', base: 'pdf/seito/pretest-grade1-term3' },
-                { term: '学年末',   base: 'pdf/seito/pretest-grade1-term4' },
+                { term: '前期期末', base: '' },
+                { term: '後期中間', base: '' },
+                { term: '学年末',   base: '' },
               ]
             },
             {
               grade: '中2', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade2-term1' },
-                { term: '前期期末', base: 'pdf/seito/pretest-grade2-term2' },
-                { term: '後期中間', base: 'pdf/seito/pretest-grade2-term3' },
-                { term: '学年末',   base: 'pdf/seito/pretest-grade2-term4' },
+                { term: '前期期末', base: '' },
+                { term: '後期中間', base: '' },
+                { term: '学年末',   base: '' },
               ]
             },
             {
               grade: '中3', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade3-term1' },
-                { term: '前期期末', base: 'pdf/seito/pretest-grade3-term2' },
-                { term: '後期中間', base: 'pdf/seito/pretest-grade3-term3' },
+                { term: '前期期末', base: '' },
+                { term: '後期中間', base: '' },
               ]
             },
           ]
@@ -1187,7 +1187,17 @@ function renderPretestSection(section) {
         html += '<div class="pt-term-card">';
         html += '<div class="pt-term-title">' + esc(t.term) + '</div>';
         if (!t.base) {
-          html += '<div style="color:#bbb;font-size:12px;padding:4px 0;">準備中です。</div>';
+          var subjects2 = ['英語','数学','理科','社会'];
+          html += '<div class="pt-btn-grid">';
+          subjects2.forEach(function(sl) {
+            html += '<div class="pt-subject">';
+            html += '<div class="pt-subject-name">' + sl + '</div>';
+            html += '<button class="pt-btn q" disabled style="background:#e5e7eb;color:#bbb;cursor:not-allowed;">問題</button>';
+            html += '<button class="pt-btn a" disabled style="background:#e5e7eb;color:#bbb;cursor:not-allowed;">解答</button>';
+            html += '</div>';
+          });
+          html += '</div>';
+          html += '<div style="color:#bbb;font-size:11px;margin-top:4px;">準備中</div>';
         } else {
           html += '<div class="pt-btn-grid">';
           subjects.forEach(function(s) {
