@@ -1353,8 +1353,14 @@ function switchTab(tab) {
 
 // ========== PDF表示 ==========
 function openPdf(path, allowDownload, name) {
-  // iOSのSafariはiframe内PDFを表示できないため、すべて別タブで開く
-  window.open(path, '_blank');
+  // iOSのSafariはwindow.openをプレビュー扱いにするため、aタグ経由で開く
+  var a = document.createElement('a');
+  a.href = path;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 function closePdfModal() {
