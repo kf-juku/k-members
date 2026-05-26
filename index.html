@@ -502,9 +502,10 @@ body {
 }
 .test-guide-block {
   padding: 16px 16px 14px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 3px solid var(--surface);
   background: #fff;
 }
+.test-guide-block + .test-guide-block { padding-top: 20px; }
 .test-guide-block:last-child { border-bottom: none; }
 .test-guide-title {
   font-size: 14px;
@@ -1261,6 +1262,9 @@ body {
       <div class="test-guide-section">
         <div class="test-guide-header">🏆 結果を出す！テスト完全攻略</div>
 
+        <div class="test-guide-block" style="background:var(--kf-navy-pale);padding:8px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--kf-navy);letter-spacing:0.05em;">① 学校ワーク編</div>
+        </div>
         <div class="test-guide-block">
           <div class="test-guide-title">📚 学校ワークを最優先で進めよう</div>
           <p class="test-guide-text">テスト勉強の基本は学校ワークです。</p>
@@ -1276,6 +1280,9 @@ body {
           </div>
         </div>
 
+        <div class="test-guide-block" style="background:var(--kf-navy-pale);padding:8px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--kf-navy);letter-spacing:0.05em;">② プレテスト編</div>
+        </div>
         <div class="test-guide-block">
           <div class="test-guide-title">📝 プレテストは「解き直し」までやろう</div>
           <p class="test-guide-text">受けるだけでは意味がありません。</p>
