@@ -1094,11 +1094,13 @@ body {
   <div class="login-card">
     <div class="login-logo">進学塾クロフネ</div>
     <div class="login-sub">塾生・保護者専用ページ</div>
-    <label class="login-label" for="pwInput">パスワード</label>
-    <input type="password" id="pwInput" class="login-input" placeholder="パスワードを入力してください"
-      autocomplete="current-password"
-      onkeydown="if(event.key==='Enter')checkPassword()">
-    <button class="login-btn" onclick="checkPassword()">入室する</button>
+    <form id="loginForm" onsubmit="checkPassword();return false;" action="#">
+      <label class="login-label" for="pwInput">パスワード</label>
+      <input type="password" id="pwInput" class="login-input" placeholder="パスワードを入力してください"
+        autocomplete="current-password"
+        name="password">
+      <button type="submit" class="login-btn">入室する</button>
+    </form>
     <div class="login-error" id="pwError">パスワードが違います。もう一度お試しください。</div>
     <div class="login-note">
       このページは塾生・保護者の方専用です。<br>
@@ -1132,16 +1134,23 @@ body {
           <div class="bell-menu-list">
             <div class="info-item">
               <div class="info-item-top">
-                <span class="info-date">2026-05-16</span>
+                <span class="info-date">2026-05-26</span>
                 <span class="info-badge new">NEW</span>
                 <span class="info-tab-badge seito">生徒向け</span>
               </div>
-              <div class="info-text">プレテスト（中1〜中3）を追加しました。</div>
+              <div class="info-text">前期中間プレテストにリスニング音声を追加しました（中1〜中3）。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-05-26</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">前期中間プレテスト（中1〜中3）を追加しました。</div>
             </div>
             <div class="info-item">
               <div class="info-item-top">
                 <span class="info-date">2026-05-15</span>
-                <span class="info-badge new">NEW</span>
                 <span class="info-tab-badge seito">生徒向け</span>
               </div>
               <div class="info-text">NEW HORIZON 英単語テスト（中1〜中3）を追加しました。</div>
@@ -1149,7 +1158,6 @@ body {
             <div class="info-item">
               <div class="info-item-top">
                 <span class="info-date">2026-05-15</span>
-                <span class="info-badge new">NEW</span>
                 <span class="info-tab-badge seito">生徒向け</span>
               </div>
               <div class="info-text">NEW HORIZON 教科書和訳（中1〜中3）を追加しました。</div>
