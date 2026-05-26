@@ -230,6 +230,12 @@ body {
 }
 .btn-pdf.answer:hover { background: var(--navy-pale); }
 
+.volume-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.volume-icon { font-size: 16px; flex-shrink: 0; }
+.volume-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer; }
+.volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); cursor: pointer; }
+.volume-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--navy); cursor: pointer; border: none; }
+.volume-val { font-size: 12px; color: var(--text-muted); min-width: 36px; text-align: right; font-variant-numeric: tabular-nums; }
 audio { display: none; }
 </style>
 </head>
@@ -266,6 +272,11 @@ audio { display: none; }
           <button class="btn-skip" onclick="skip(-10)">⏪ 10秒</button>
           <button class="btn-play" id="btnPlay" onclick="togglePlay()">▶</button>
           <button class="btn-skip" onclick="skip(10)">10秒 ⏩</button>
+        </div>
+        <div class="volume-row">
+          <span class="volume-icon">🔊</span>
+          <input type="range" class="volume-slider" id="volSlider" min="0" max="100" value="100" oninput="setVolume(this.value)">
+          <span class="volume-val" id="volVal">100%</span>
         </div>
       </div>
     </div>
@@ -316,6 +327,11 @@ audio.addEventListener('ended', function() {
   btnPlay.textContent = '▶';
 });
 
+function setVolume(v) {
+  audio.volume = v / 100;
+  document.getElementById('volVal').textContent = v + '%';
+  document.getElementById('volSlider').value = v;
+}
 function togglePlay() {
   if (audio.paused) {
     audio.play();
