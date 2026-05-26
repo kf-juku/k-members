@@ -1421,7 +1421,7 @@ function checkPassword() {
   var pw = document.getElementById('pwInput').value;
   if (!pw) return;
   if (pw === PASSWORD) {
-    sessionStorage.setItem('lib_auth', '1');
+    localStorage.setItem('lib_auth', '1');
     showMain();
   } else {
     document.getElementById('pwError').style.display = 'block';
@@ -1469,7 +1469,7 @@ function toggleAccSimple(btn) {
 }
 
 function logout() {
-  sessionStorage.removeItem('lib_auth');
+  localStorage.removeItem('lib_auth');
   location.reload();
 }
 
@@ -1872,7 +1872,7 @@ function closePdfModal() {
 window.addEventListener('DOMContentLoaded', function() {
   // ?dev をURLに付けると認証スキップ（開発用。本番では使わない）
   var devMode = location.search.indexOf('dev') !== -1;
-  if (devMode || sessionStorage.getItem('lib_auth') === '1') {
+  if (devMode || localStorage.getItem('lib_auth') === '1') {
     showMain();
   }
 });
