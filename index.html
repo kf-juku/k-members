@@ -981,6 +981,13 @@ body {
 .subject-jump-btn .qm-icon { flex-shrink: 0; line-height: 0; display: inline-flex; }
 .subject-jump-btn .qm-svg { width: 21px; height: 21px; display: block; }
 .subject-jump-btn.disabled .qm-svg { filter: grayscale(1); opacity: 0.5; }
+.subject-jump-btn.qm-attack {
+  background: #fef3e2;
+  border-color: #fcd9a8;
+  color: #92400e;
+}
+.subject-jump-btn.qm-attack:hover { background: #fde8c8; border-color: #f5b95e; }
+#test-guide { scroll-margin-top: 70px; }
 .subject-jump-btn .qm-text { flex: 1; min-width: 0; line-height: 1.3; }
 .subject-jump-btn .qm-text small { font-size: 10px; font-weight: bold; color: var(--text-light); }
 .subject-jump-btn.disabled {
@@ -1438,8 +1445,11 @@ body {
     <!-- 生徒向けタブ -->
     <div class="tab-panel" id="panelSeito">
 
+      <!-- クイックメニュー（生徒タブ最上部・JS生成） 川上さん指示(2026-06-15)：一番上に配置 -->
+      <div id="quickMenuSeito"></div>
+
       <!-- テスト完全攻略セクション -->
-      <div class="test-guide-section">
+      <div class="test-guide-section" id="test-guide">
         <div class="test-guide-header"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:20px;height:20px;display:block;"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z" fill="#fff"/><path d="M7 5H4v2a3 3 0 0 0 3 3" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M17 5h3v2a3 3 0 0 1-3 3" stroke="#fff" stroke-width="1.6" fill="none"/><rect x="10.5" y="12.5" width="3" height="4" fill="#fff"/><rect x="8" y="18" width="8" height="2.5" rx="1" fill="#fff"/></svg><span>結果を出す！テスト完全攻略</span></div>
 
         <div class="test-guide-block" style="background:var(--kf-navy-pale);padding:8px 16px;">
@@ -1813,6 +1823,7 @@ function catAnchorId(cat){ return 'cat-' + encodeURIComponent(cat).replace(/%/g,
 var QM_LABELS = {'NEW HORIZON 教科書和訳':'教科書和訳','NEW HORIZON 英単語テスト':'英単語テスト','ぐるぐる英作文':'ぐるぐる英作文','ぐるぐる数学':'ぐるぐる数学','プレテスト':'プレテスト'};
 function qmLabel(cat){ return QM_LABELS[cat] || cat; }
 // クイックメニュー用アイコン
+var QM_ICON_TROPHY = '<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z" fill="#92400e"></path><path d="M7 5H4v2a3 3 0 0 0 3 3" stroke="#92400e" stroke-width="1.6" fill="none"></path><path d="M17 5h3v2a3 3 0 0 1-3 3" stroke="#92400e" stroke-width="1.6" fill="none"></path><rect x="10.5" y="12.5" width="3" height="4" fill="#92400e"></rect><rect x="8" y="18" width="8" height="2.5" rx="1" fill="#92400e"></rect></svg>';
 var QM_ICONS = {'NEW HORIZON 教科書和訳':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M12 6 C9 4 5 4 3 5 V18 C5 17 9 17 12 19 Z" fill="#1a3a5c"></path><path d="M12 6 C15 4 19 4 21 5 V18 C19 17 15 17 12 19 Z" fill="#3d6a9f"></path></svg>','NEW HORIZON 英単語テスト':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" fill="#1a3a5c"></rect><path d="M8 8 l1.5 1.5 L12.5 6.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><line x1="14" y1="8" x2="16.5" y2="8" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></line><path d="M8 13 l1.5 1.5 L12.5 11.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><line x1="14" y1="13" x2="16.5" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></line></svg>','ぐるぐる英作文':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M6 3 h8 l4 4 v14 h-12 Z" fill="#1a3a5c"></path><path d="M14 3 v4 h4" fill="#3d6a9f"></path><line x1="8" y1="12" x2="15" y2="12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="15" x2="15" y2="15" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="18" x2="12" y2="18" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line></svg>','ぐるぐる数学':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M6 3 h8 l4 4 v14 h-12 Z" fill="#1a3a5c"></path><path d="M14 3 v4 h4" fill="#3d6a9f"></path><line x1="8" y1="12" x2="15" y2="12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="15" x2="15" y2="15" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="18" x2="12" y2="18" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line></svg>','プレテスト':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><rect x="4.5" y="2.5" width="15" height="19" rx="2" fill="#1a3a5c"></rect><circle cx="14.5" cy="8" r="3" fill="none" stroke="#ff6b6b" stroke-width="1.5"></circle><line x1="7.5" y1="13" x2="16.5" y2="13" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line><line x1="7.5" y1="16" x2="16.5" y2="16" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line><line x1="7.5" y1="19" x2="12.5" y2="19" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line></svg>'};
 // カテゴリにPDFが1つでもあるか（なければクイックメニューでグレーアウト）
 function categoryHasPdf(section){
@@ -1989,27 +2000,30 @@ function renderTab(key, containerId) {
   var html = '';
 
   if (key === 'seito') {
-    // クイックメニュー：全カテゴリへ1タップで飛べる（スマホ前提・2列グリッド）
-    // 川上さん指示(2026-06-15)：全カテゴリを出す。教科単位ではなくカテゴリ単位で飛ぶ。
-    html += '<div class="quick-menu">';
-    html += '<div class="quick-menu-label">📂 さがす（タップで移動）</div>';
-    html += '<div class="quick-menu-grid">';
+    // クイックメニューは別コンテナ(#quickMenuSeito)に描く（生徒タブ最上部）
+    // 川上さん指示(2026-06-15)：クイックメニューを一番上に、先頭にテスト完全攻略ボタン(茶色)を置く。
+    var qm = '<div class="quick-menu">';
+    qm += '<div class="quick-menu-label">📂 さがす（タップで移動）</div>';
+    qm += '<div class="quick-menu-grid">';
+    // 先頭：テスト完全攻略ボタン（茶色で目立たせる・#test-guideへジャンプ）
+    qm += '<a class="subject-jump-btn qm-attack" href="#test-guide"><span class="qm-icon">' + QM_ICON_TROPHY + '</span><span class="qm-text">テスト完全攻略</span></a>';
     data.forEach(function(subj) {
       subj.categories.forEach(function(section) {
         var cid = catAnchorId(section.category);
         var icon = QM_ICONS[section.category] || '📄';
         var label = esc(qmLabel(section.category));
         if (categoryHasPdf(section)) {
-          html += '<a class="subject-jump-btn" href="#' + cid + '"><span class="qm-icon">' + icon + '</span><span class="qm-text">' + label + '</span></a>';
+          qm += '<a class="subject-jump-btn" href="#' + cid + '"><span class="qm-icon">' + icon + '</span><span class="qm-text">' + label + '</span></a>';
         } else {
-          // PDF未準備：グレーアウト＆リンク無効（準備中）
-          html += '<span class="subject-jump-btn disabled"><span class="qm-icon">' + icon + '</span><span class="qm-text">' + label + '<br><small>準備中</small></span></span>';
+          qm += '<span class="subject-jump-btn disabled"><span class="qm-icon">' + icon + '</span><span class="qm-text">' + label + '<br><small>準備中</small></span></span>';
         }
       });
     });
-    html += '</div></div>';
+    qm += '</div></div>';
+    var qmEl = document.getElementById('quickMenuSeito');
+    if (qmEl) qmEl.innerHTML = qm;
 
-    // 教科ブロック
+    // 教科ブロック（#fileListSeitoに描く）
     var subjClass = {'subj-english':'c-english','subj-math':'c-math','subj-test':'c-test'};
     data.forEach(function(subj) {
       var sc = subjClass[subj.id] || '';
