@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>進学塾クロフネ｜塾生・保護者専用ページ</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%8F%A0%3C/text%3E%3C/svg%3E">
+    <title>進学塾クロフネ｜塾生・保護者専用ページ</title>
 <style>
 /* ========== CSS変数（クロフネ共通パレット） ========== */
 :root {
@@ -267,29 +268,31 @@ body {
 }
 .tab-btn {
   flex: 1;
-  padding: 13px 8px 11px;
-  font-size: 14px;
+  padding: 15px 8px 13px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--text-muted);
   background: none;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
   cursor: pointer;
-  min-height: 48px;
-  transition: color 0.2s, border-color 0.2s;
+  min-height: 56px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
   font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   letter-spacing: 0.02em;
 }
-.tab-btn .tab-icon { font-size: 16px; }
+.tab-btn .tab-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; }
+.tab-btn .tab-icon svg { width: 22px; height: 22px; display: block; }
 .tab-btn.active {
-  color: var(--kf-navy);
+  color: #fff;
   border-bottom-color: var(--kf-navy);
-  background: var(--kf-navy-ultra);
+  background: var(--kf-navy);
 }
+.tab-btn.active .tab-icon svg [data-fill]{ fill: #fff; }
 .tab-btn:hover:not(.active) { color: var(--kf-navy-light); background: var(--surface); }
 
 /* ========== コンテンツ ========== */
@@ -300,6 +303,111 @@ body {
 }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
+
+/* ========== 入口選択画面（初回ログイン時のみ） ========== */
+#entryChooser {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--surface);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#entryChooser.show { display: block; }
+.entry-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 18px 48px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.entry-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.entry-head .entry-logo {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--kf-navy);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.entry-head h1 {
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+.entry-head p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+.entry-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.entry-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 18px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.entry-card:hover { border-color: var(--kf-navy-light); box-shadow: var(--shadow); }
+.entry-card:active { transform: scale(0.99); }
+.entry-card-icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.entry-card-icon svg { width: 48px; height: 48px; display: block; }
+.entry-card.hogo .entry-card-icon { background: var(--blue-light); }
+.entry-card.seito .entry-card-icon { background: var(--green-light); }
+.entry-card-body { flex: 1; min-width: 0; }
+.entry-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.entry-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.entry-card-arrow {
+  flex-shrink: 0;
+  color: var(--text-light);
+  font-size: 20px;
+}
+.entry-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 22px;
+  line-height: 1.6;
+}
 
 /* ========== お知らせボックス ========== */
 .notice-box {
@@ -336,6 +444,13 @@ body {
   font-size: 13px;
   opacity: 0.75;
 }
+.section-header .sec-icon svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  opacity: 1;
+}
+.section-header .sec-icon { display: inline-flex; align-items: center; }
 
 
 /* 旧 .category-title との互換性を維持しつつ新スタイルも提供 */
@@ -530,27 +645,26 @@ body {
   line-height: 1;
 }
 .test-guide-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 6px 0;
+  position: relative;
+  padding: 6px 0 6px 28px;
   border-bottom: 1px solid var(--surface2);
 }
 .test-guide-list li:last-child { border-bottom: none; }
 .test-guide-list li::before {
   content: '✓';
+  position: absolute;
+  left: 0;
+  top: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
+  width: 20px;
   height: 20px;
   background: var(--green);
   color: white;
   border-radius: 50%;
   font-size: 11px;
   font-weight: bold;
-  margin-top: 1px;
-  flex-shrink: 0;
 }
 .tg-key {
   color: var(--blue);
@@ -1109,6 +1223,47 @@ body {
   </div>
 </div>
 
+<!-- ========== 入口選択画面（初回ログイン時のみ表示） ========== -->
+<!-- 川上さん指示(2026-06-15)：中学生がタブの分かれに気づかずテストにたどり着けない問題への対策。初回ログイン時のみ表示し、選択をlocalStorage(entry_chosen)に記録。以降はタブで切替。 -->
+<div id="entryChooser">
+  <div class="entry-inner">
+    <div class="entry-head">
+      <div class="entry-logo">進学塾クロフネ 塾生・保護者専用ページ</div>
+      <p>あとからいつでも上のタブで切り替えられます</p>
+    </div>
+    <div class="entry-cards">
+      <button class="entry-card hogo" onclick="chooseEntry('hogo')">
+        <span class="entry-card-icon">
+          <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="27" cy="22" r="9" fill="#185FA5" data-fill></circle>
+            <path d="M12 54c0-9 7-15 15-15s15 6 15 15z" fill="#185FA5" data-fill></path>
+            <circle cx="51" cy="30" r="6.5" fill="#85B7EB"></circle>
+            <path d="M40 54c0-7 5-11 11-11s11 4 11 11z" fill="#85B7EB"></path>
+          </svg>
+        </span>
+        <span class="entry-card-body">
+          <span class="entry-card-title">保護者向け</span>
+          <span class="entry-card-desc">時間割・年間予定表・規約類など、保護者の方向けの資料</span>
+        </span>
+        <span class="entry-card-arrow">&rsaquo;</span>
+      </button>
+      <button class="entry-card seito" onclick="chooseEntry('seito')">
+        <span class="entry-card-icon">
+          <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M36 22 C30 18 18 18 12 21 V50 C18 47 30 47 36 51 Z" fill="#639922" data-fill></path>
+            <path d="M36 22 C42 18 54 18 60 21 V50 C54 47 42 47 36 51 Z" fill="#3B6D11"></path>
+          </svg>
+        </span>
+        <span class="entry-card-body">
+          <span class="entry-card-title">生徒向け</span>
+          <span class="entry-card-desc">テスト対策・プレテスト・教科書和訳・英単語テストなど、勉強に使う資料</span>
+        </span>
+        <span class="entry-card-arrow">&rsaquo;</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== メインコンテンツ ========== -->
 <div id="mainContent">
 
@@ -1171,8 +1326,8 @@ body {
 
   <div class="tab-bar">
     <div class="tab-inner">
-      <button class="tab-btn active" id="tabBtnHogo" onclick="switchTab('hogo')"><span class="tab-icon">🏫</span><span class="tab-label-pc">保護者向け</span><span class="tab-label-sp">保護者</span></button>
-      <button class="tab-btn" id="tabBtnSeito" onclick="switchTab('seito')"><span class="tab-icon">🎒</span><span class="tab-label-pc">生徒向け</span><span class="tab-label-sp">生徒</span></button>
+      <button class="tab-btn active" id="tabBtnHogo" onclick="switchTab('hogo')"><span class="tab-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="27" cy="22" r="9" fill="#185FA5" data-fill></circle><path d="M12 54c0-9 7-15 15-15s15 6 15 15z" fill="#185FA5" data-fill></path><circle cx="51" cy="30" r="6.5" fill="#85B7EB" data-fill></circle><path d="M40 54c0-7 5-11 11-11s11 4 11 11z" fill="#85B7EB" data-fill></path></svg></span><span class="tab-label-pc">保護者向け</span><span class="tab-label-sp">保護者</span></button>
+      <button class="tab-btn" id="tabBtnSeito" onclick="switchTab('seito')"><span class="tab-icon"><svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M36 22 C30 18 18 18 12 21 V50 C18 47 30 47 36 51 Z" fill="#639922" data-fill></path><path d="M36 22 C42 18 54 18 60 21 V50 C54 47 42 47 36 51 Z" fill="#3B6D11" data-fill></path></svg></span><span class="tab-label-pc">生徒向け</span><span class="tab-label-sp">生徒</span></button>
     </div>
   </div>
 
@@ -1185,7 +1340,7 @@ body {
 
       <!-- 時間割セクション -->
       <div class="category-section">
-        <div class="section-header"><span class="sec-icon">📅</span>時間割</div>
+        <div class="section-header"><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="#1a3a5c"/><rect x="3" y="5" width="18" height="5" rx="2" fill="#3d6a9f"/><rect x="7" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="15" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="6.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="11" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="15.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/></svg></span>時間割</div>
 
         <!-- 北久里浜校 -->
         <button class="accordion-btn" onclick="toggleAccSimple(this)">
@@ -1268,7 +1423,7 @@ body {
 
       <!-- テスト完全攻略セクション -->
       <div class="test-guide-section">
-        <div class="test-guide-header">🏆 結果を出す！テスト完全攻略</div>
+        <div class="test-guide-header"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:20px;height:20px;display:block;"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z" fill="#fff"/><path d="M7 5H4v2a3 3 0 0 0 3 3" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M17 5h3v2a3 3 0 0 1-3 3" stroke="#fff" stroke-width="1.6" fill="none"/><rect x="10.5" y="12.5" width="3" height="4" fill="#fff"/><rect x="8" y="18" width="8" height="2.5" rx="1" fill="#fff"/></svg><span>結果を出す！テスト完全攻略</span></div>
 
         <div class="test-guide-block" style="background:var(--kf-navy-pale);padding:8px 16px;">
           <div style="font-size:11px;font-weight:700;color:var(--kf-navy);letter-spacing:0.05em;">① 学校ワーク編</div>
@@ -1447,12 +1602,29 @@ function showMain() {
   // 初回ログイン時のみ注意ポップアップを表示
   if (!sessionStorage.getItem('lib_notice_shown')) {
     document.getElementById('noticeOverlay').classList.add('show');
+  } else {
+    // 注意ポップアップが既に確認済みなら、入口選択（初回のみ）を判定
+    maybeShowEntryChooser();
   }
 }
 
 function closeNotice() {
   document.getElementById('noticeOverlay').classList.remove('show');
   sessionStorage.setItem('lib_notice_shown', '1');
+  // 注意を閉じたあとに入口選択（初回のみ）
+  maybeShowEntryChooser();
+}
+
+// 川上さん指示(2026-06-15)：入口選択画面は初回ログイン時のみ表示。一度選んだらentry_chosenに記録し以降は出さない。
+function maybeShowEntryChooser() {
+  if (localStorage.getItem('entry_chosen')) return;
+  document.getElementById('entryChooser').classList.add('show');
+}
+
+function chooseEntry(tab) {
+  localStorage.setItem('entry_chosen', tab);
+  document.getElementById('entryChooser').classList.remove('show');
+  switchTab(tab);
 }
 
 function toggleAcc(btn, gridId) {
@@ -1725,7 +1897,7 @@ function renderGururuSection(section) {
 }
 
 // カテゴリアイコンマップ
-var CATEGORY_ICONS = {'年間予定表':'📅','規約類':'📋','NEW HORIZON 教科書和訳':'📖','NEW HORIZON 英単語テスト':'📝','ぐるぐる英作文':'✍️','ぐるぐる数学':'📐','プレテスト':'🎯'};
+var CATEGORY_ICONS = {'年間予定表':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="#1a3a5c"/><rect x="3" y="5" width="18" height="5" rx="2" fill="#3d6a9f"/><rect x="7" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="15" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="6.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="11" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="15.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/></svg>','規約類':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="#1a3a5c"/><path d="M14 3v4h4" fill="#3d6a9f"/><rect x="8.5" y="11" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="14.5" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="18" width="4.5" height="1.6" rx="0.8" fill="#fff"/></svg>','NEW HORIZON 教科書和訳':'📖','NEW HORIZON 英単語テスト':'📝','ぐるぐる英作文':'✍️','ぐるぐる数学':'📐','プレテスト':'🎯'};
 
 function renderCategoryBlock(section) {
   var icon = CATEGORY_ICONS[section.category] || '📄';
