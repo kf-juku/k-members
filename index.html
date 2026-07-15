@@ -568,8 +568,9 @@ body {
   color: white;
 }
 .btn-open:hover { background: var(--kf-navy-mid); }
-#panelSeito .btn-open { background: var(--green); }
-#panelSeito .btn-open:hover { background: var(--green-dark); }
+/* 案A：生徒タブの「開く」も濃紺に統一 */
+#panelSeito .btn-open { background: var(--kf-navy); }
+#panelSeito .btn-open:hover { background: var(--kf-navy-mid); }
 .btn-dl {
   background: var(--surface2);
   color: var(--text-muted);
@@ -631,6 +632,7 @@ body {
   align-items: center;
   gap: 6px;
 }
+.test-guide-title svg { width: 18px; height: 18px; flex-shrink: 0; }
 .test-guide-text {
   font-size: 13px;
   color: var(--text-muted);
@@ -667,7 +669,7 @@ body {
   font-weight: bold;
 }
 .tg-key {
-  color: var(--blue);
+  color: var(--kf-navy);
   font-weight: bold;
 }
 .test-guide-imgs {
@@ -698,7 +700,7 @@ body {
   gap: 6px;
   width: 100%;
   padding: 12px;
-  background: var(--blue);
+  background: var(--kf-navy);
   color: white;
   border: none;
   border-radius: var(--radius);
@@ -711,7 +713,7 @@ body {
   transition: background 0.15s, transform 0.1s;
   letter-spacing: 0.02em;
 }
-.test-guide-btn:hover { background: #1d4ed8; }
+.test-guide-btn:hover { background: var(--kf-navy-mid); }
 .test-guide-btn:active { transform: scale(0.98); }
 
 /* ========== やり方ブロック ========== */
@@ -954,6 +956,7 @@ body {
   align-items: center;
   gap: 6px;
 }
+.quick-menu-label svg { width: 17px; height: 17px; flex-shrink: 0; }
 .quick-menu-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -982,11 +985,11 @@ body {
 .subject-jump-btn .qm-svg { width: 21px; height: 21px; display: block; }
 .subject-jump-btn.disabled .qm-svg { filter: grayscale(1); opacity: 0.5; }
 .subject-jump-btn.qm-attack {
-  background: #fef3e2;
-  border-color: #fcd9a8;
-  color: #92400e;
+  background: #fbf1dc;
+  border-color: #e7cf9a;
+  color: #7a5716;
 }
-.subject-jump-btn.qm-attack:hover { background: #fde8c8; border-color: #f5b95e; }
+.subject-jump-btn.qm-attack:hover { background: #f6e7c4; border-color: #d9bb78; }
 #test-guide { scroll-margin-top: 70px; }
 .subject-jump-btn .qm-text { flex: 1; min-width: 0; line-height: 1.3; }
 .subject-jump-btn .qm-text small { font-size: 10px; font-weight: bold; color: var(--text-light); }
@@ -1006,21 +1009,22 @@ body {
 .subject-heading {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  gap: 10px;
+  font-size: 17px;
   font-weight: bold;
-  color: white;
-  background: var(--kf-navy);
-  padding: 12px 16px;
+  color: var(--kf-navy);
+  background: var(--kf-navy-ultra);
+  border-left: 5px solid var(--kf-navy);
+  padding: 11px 14px;
   border-radius: var(--radius);
   margin-bottom: 12px;
   margin-top: 28px;
   scroll-margin-top: 110px;
 }
 .subject-heading:first-of-type { margin-top: 4px; }
-.subject-heading.c-english { background: #1e40af; }
-.subject-heading.c-math    { background: #15803d; }
-.subject-heading.c-test    { background: #92400e; }
+/* 案A：教科ごとの色分けは廃止。区別はアイコンチップと文字で行う（色は状態のみ使う） */
+.subj-chip { width: 28px; height: 28px; border-radius: 7px; background: var(--kf-navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.subj-chip svg { width: 17px; height: 17px; display: block; }
 
 /* ========== プレテスト ========== */
 .pt-grade-acc {
@@ -1117,13 +1121,13 @@ body {
   border-radius: 8px;
   cursor: pointer;
   border: none;
-  background: var(--green);
+  background: var(--kf-navy);
   color: #fff;
   min-height: 44px;
   transition: background 0.15s, transform 0.1s;
   font-family: inherit;
 }
-.grade-btn:hover { background: var(--green-dark); }
+.grade-btn:hover { background: var(--kf-navy-mid); }
 .grade-btn:active { transform: scale(0.97); }
 .grade-btn.disabled { background: #c8d3df; cursor: not-allowed; color: #fff; }
 
@@ -1217,8 +1221,8 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
 }
-.info-tab-badge.hogo { background: var(--blue-light); color: #1d4ed8; }
-.info-tab-badge.seito { background: var(--green-light); color: #166534; }
+.info-tab-badge.hogo { background: var(--kf-navy-pale); color: var(--kf-navy); }
+.info-tab-badge.seito { background: var(--kf-navy-pale); color: var(--kf-navy); }
 </style>
 </head>
 <body>
@@ -1227,7 +1231,7 @@ body {
 <!-- 注意ポップアップ -->
 <div id="noticeOverlay">
   <div class="notice-popup">
-    <div class="notice-icon">🔒</div>
+    <div class="notice-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
     <h3>ご利用にあたってのお願い</h3>
     <p>このページは塾生・保護者の方専用です。<br>URLやパスワードの外部共有はお控えください。</p>
     <button onclick="closeNotice()">確認しました</button>
@@ -1317,6 +1321,14 @@ body {
             お知らせ・更新情報
           </div>
           <div class="bell-menu-list">
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-07-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">ぐるぐる数学（中1〜中3）を追加しました。単元ごとに問題・解答が開けます。</div>
+            </div>
             <div class="info-item">
               <div class="info-item-top">
                 <span class="info-date">2026-05-26</span>
@@ -1462,7 +1474,7 @@ body {
           <div style="font-size:11px;font-weight:700;color:var(--kf-navy);letter-spacing:0.05em;">① 学校ワーク編</div>
         </div>
         <div class="test-guide-block">
-          <div class="test-guide-title">📚 学校ワークを最優先で進めよう</div>
+          <div class="test-guide-title"><svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6v13M12 6v13M21 6v13"/></svg>学校ワークを最優先で進めよう</div>
           <p class="test-guide-text">テスト勉強の基本は学校ワークです。</p>
           <ul class="test-guide-list">
             <li><span class="tg-key">テスト3週間前の金曜日まで</span>に、習った範囲を塾に提出</li>
@@ -1480,14 +1492,14 @@ body {
           <div style="font-size:11px;font-weight:700;color:var(--kf-navy);letter-spacing:0.05em;">② プレテスト編</div>
         </div>
         <div class="test-guide-block">
-          <div class="test-guide-title">📝 プレテストは「解き直し」までやろう</div>
+          <div class="test-guide-title"><svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg>プレテストは「解き直し」までやろう</div>
           <p class="test-guide-text">受けるだけでは意味がありません。</p>
           <ul class="test-guide-list">
             <li>間違えた問題を<span class="tg-key">「なぜ間違えたか」まで</span>確認する</li>
             <li>PDFで<span class="tg-key">2回目に挑戦</span>しよう</li>
           </ul>
           <img src="img/プレテスト_解き直しのポイント.png" alt="プレテスト解き直しのポイント" style="width:100%;max-width:480px;display:block;margin:14px auto 0;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.10);" oncontextmenu="return false;" draggable="false">
-          <button class="test-guide-btn" onclick="var el=document.getElementById('subj-test'); if(el){el.scrollIntoView({behavior:'smooth'});}else{document.getElementById('fileListSeito').scrollIntoView({behavior:'smooth'});}">📄 プレテストPDFを見る</button>
+          <button class="test-guide-btn" onclick="var el=document.getElementById('subj-test'); if(el){el.scrollIntoView({behavior:'smooth'});}else{document.getElementById('fileListSeito').scrollIntoView({behavior:'smooth'});}">プレテストPDFを見る</button>
         </div>
       </div>
 
@@ -1876,7 +1888,7 @@ function catAnchorId(cat){ return 'cat-' + encodeURIComponent(cat).replace(/%/g,
 var QM_LABELS = {'NEW HORIZON 教科書和訳':'教科書和訳','NEW HORIZON 英単語テスト':'英単語テスト','ぐるぐる英作文':'ぐるぐる英作文','ぐるぐる数学':'ぐるぐる数学','プレテスト':'プレテスト'};
 function qmLabel(cat){ return QM_LABELS[cat] || cat; }
 // クイックメニュー用アイコン
-var QM_ICON_TROPHY = '<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z" fill="#92400e"></path><path d="M7 5H4v2a3 3 0 0 0 3 3" stroke="#92400e" stroke-width="1.6" fill="none"></path><path d="M17 5h3v2a3 3 0 0 1-3 3" stroke="#92400e" stroke-width="1.6" fill="none"></path><rect x="10.5" y="12.5" width="3" height="4" fill="#92400e"></rect><rect x="8" y="18" width="8" height="2.5" rx="1" fill="#92400e"></rect></svg>';
+var QM_ICON_TROPHY = '<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z" fill="#b8862b"></path><path d="M7 5H4v2a3 3 0 0 0 3 3" stroke="#b8862b" stroke-width="1.6" fill="none"></path><path d="M17 5h3v2a3 3 0 0 1-3 3" stroke="#b8862b" stroke-width="1.6" fill="none"></path><rect x="10.5" y="12.5" width="3" height="4" fill="#b8862b"></rect><rect x="8" y="18" width="8" height="2.5" rx="1" fill="#b8862b"></rect></svg>';
 var QM_ICONS = {'NEW HORIZON 教科書和訳':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M12 6 C9 4 5 4 3 5 V18 C5 17 9 17 12 19 Z" fill="#1a3a5c"></path><path d="M12 6 C15 4 19 4 21 5 V18 C19 17 15 17 12 19 Z" fill="#3d6a9f"></path></svg>','NEW HORIZON 英単語テスト':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" fill="#1a3a5c"></rect><path d="M8 8 l1.5 1.5 L12.5 6.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><line x1="14" y1="8" x2="16.5" y2="8" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></line><path d="M8 13 l1.5 1.5 L12.5 11.5" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><line x1="14" y1="13" x2="16.5" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></line></svg>','ぐるぐる英作文':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M6 3 h8 l4 4 v14 h-12 Z" fill="#1a3a5c"></path><path d="M14 3 v4 h4" fill="#3d6a9f"></path><line x1="8" y1="12" x2="15" y2="12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="15" x2="15" y2="15" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="18" x2="12" y2="18" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line></svg>','ぐるぐる数学':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><path d="M6 3 h8 l4 4 v14 h-12 Z" fill="#1a3a5c"></path><path d="M14 3 v4 h4" fill="#3d6a9f"></path><line x1="8" y1="12" x2="15" y2="12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="15" x2="15" y2="15" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="18" x2="12" y2="18" stroke="#fff" stroke-width="1.4" stroke-linecap="round"></line></svg>','プレテスト':'<svg viewBox="0 0 24 24" class="qm-svg" aria-hidden="true"><rect x="4.5" y="2.5" width="15" height="19" rx="2" fill="#1a3a5c"></rect><circle cx="14.5" cy="8" r="3" fill="none" stroke="#ff6b6b" stroke-width="1.5"></circle><line x1="7.5" y1="13" x2="16.5" y2="13" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line><line x1="7.5" y1="16" x2="16.5" y2="16" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line><line x1="7.5" y1="19" x2="12.5" y2="19" stroke="#fff" stroke-width="1.3" stroke-linecap="round"></line></svg>'};
 // カテゴリにPDFが1つでもあるか（なければクイックメニューでグレーアウト）
 function categoryHasPdf(section){
@@ -1908,10 +1920,10 @@ function renderFileCard(f) {
   if (f.disabled) {
     html += '<button class="btn-open" disabled style="background:#c8d3df;cursor:not-allowed;color:#fff;">準備中</button>';
   } else if (f.download) {
-    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', true, \'' + esc(f.name) + '\')">📄 開く</button>';
-    html += '<a class="btn-dl" href="' + f.path + '" download>⬇ 保存</a>';
+    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', true, \'' + esc(f.name) + '\')">開く</button>';
+    html += '<a class="btn-dl" href="' + f.path + '" download>保存</a>';
   } else {
-    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', false, \'' + esc(f.name) + '\')">📄 開く</button>';
+    html += '<button class="btn-open" onclick="openPdf(\'' + f.path + '\', false, \'' + esc(f.name) + '\')">開く</button>';
   }
   html += '</div>';
   html += '</div>';
@@ -2008,16 +2020,16 @@ function renderGururuSection(section) {
 }
 
 // カテゴリアイコンマップ
-var CATEGORY_ICONS = {'年間予定表':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="#1a3a5c"/><rect x="3" y="5" width="18" height="5" rx="2" fill="#3d6a9f"/><rect x="7" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="15" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="6.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="11" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="15.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/></svg>','規約類':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="#1a3a5c"/><path d="M14 3v4h4" fill="#3d6a9f"/><rect x="8.5" y="11" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="14.5" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="18" width="4.5" height="1.6" rx="0.8" fill="#fff"/></svg>','NEW HORIZON 教科書和訳':'📖','NEW HORIZON 英単語テスト':'📝','ぐるぐる英作文':'✍️','ぐるぐる数学':'📐','プレテスト':'🎯'};
+var CATEGORY_ICONS = {'年間予定表':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="#1a3a5c"/><rect x="3" y="5" width="18" height="5" rx="2" fill="#3d6a9f"/><rect x="7" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="15" y="2.5" width="2" height="4" rx="1" fill="#1a3a5c"/><rect x="6.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="11" y="13" width="3" height="3" rx="0.6" fill="#fff"/><rect x="15.5" y="13" width="3" height="3" rx="0.6" fill="#fff"/></svg>','規約類':'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" fill="#1a3a5c"/><path d="M14 3v4h4" fill="#3d6a9f"/><rect x="8.5" y="11" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="14.5" width="7" height="1.6" rx="0.8" fill="#fff"/><rect x="8.5" y="18" width="4.5" height="1.6" rx="0.8" fill="#fff"/></svg>','NEW HORIZON 教科書和訳':'<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6v13M12 6v13M21 6v13"/></svg>','NEW HORIZON 英単語テスト':'<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l1.6 1.6L8.5 5"/><path d="M4 13l1.6 1.6L8.5 11.5"/><path d="M12 7h8M12 14h8"/></svg>','ぐるぐる英作文':'<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M13.5 6.5l3 3"/></svg>','ぐるぐる数学':'<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4L7 21l-4-4z"/><path d="M15 7l-1.5 1.5M12 10l-1.5 1.5M9 13l-1.5 1.5"/></svg>','プレテスト':'<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg>'};
 
 function renderCategoryBlock(section) {
-  var icon = CATEGORY_ICONS[section.category] || '📄';
+  var icon = CATEGORY_ICONS[section.category] || '<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
   var html = '<div class="category-section" id="' + catAnchorId(section.category) + '">';
   html += '<div class="section-header"><span class="sec-icon">' + icon + '</span>' + esc(section.category) + '</div>';
   if (section.desc) html += '<div class="category-desc">' + esc(section.desc) + '</div>';
   if (section.howto) {
     html += '<div class="howto-block">';
-    html += '<div class="howto-label">📝 やり方</div>';
+    html += '<div class="howto-label">やり方</div>';
     html += '<p class="howto-text">' + esc(section.howto.text) + '</p>';
     html += '<img src="' + section.howto.img + '" class="howto-img" alt="やり方の見本" oncontextmenu="return false;" draggable="false">';
     html += '</div>';
@@ -2050,13 +2062,13 @@ function renderCategoryBlock(section) {
 
 // 教科アイコン（テキストバッジ）
 var SUBJECT_ICONS = {
-  'subj-english': 'EN',
-  'subj-math':    '数',
-  'subj-test':    '対策',
+  'subj-english': '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0 9 9 0 0 1 9 0"/><path d="M3 6v13M12 6v13M21 6v13"/></svg>',
+  'subj-math':    '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4L7 21l-4-4z"/><path d="M15 7l-1.5 1.5M12 10l-1.5 1.5M9 13l-1.5 1.5"/></svg>',
+  'subj-test':    '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg>',
 };
 
 function getSubjectIcon(id) {
-  return SUBJECT_ICONS[id] || '📄';
+  return SUBJECT_ICONS[id] || '<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
 }
 
 function renderTab(key, containerId) {
@@ -2067,14 +2079,14 @@ function renderTab(key, containerId) {
     // クイックメニューは別コンテナ(#quickMenuSeito)に描く（生徒タブ最上部）
     // 川上さん指示(2026-06-15)：クイックメニューを一番上に、先頭にテスト完全攻略ボタン(茶色)を置く。
     var qm = '<div class="quick-menu">';
-    qm += '<div class="quick-menu-label">📂 さがす（タップで移動）</div>';
+    qm += '<div class="quick-menu-label"><svg viewBox="0 0 24 24" fill="none" stroke="#5a6a7e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>さがす（タップで移動）</div>';
     qm += '<div class="quick-menu-grid">';
     // 先頭：テスト完全攻略ボタン（茶色で目立たせる・#test-guideへジャンプ）
     qm += '<a class="subject-jump-btn qm-attack" href="#test-guide"><span class="qm-icon">' + QM_ICON_TROPHY + '</span><span class="qm-text">テスト完全攻略</span></a>';
     data.forEach(function(subj) {
       subj.categories.forEach(function(section) {
         var cid = catAnchorId(section.category);
-        var icon = QM_ICONS[section.category] || '📄';
+        var icon = QM_ICONS[section.category] || '<svg viewBox="0 0 24 24" fill="none" stroke="#1a3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
         var label = esc(qmLabel(section.category));
         if (categoryHasPdf(section)) {
           qm += '<a class="subject-jump-btn" href="#' + cid + '"><span class="qm-icon">' + icon + '</span><span class="qm-text">' + label + '</span></a>';
@@ -2092,6 +2104,7 @@ function renderTab(key, containerId) {
     data.forEach(function(subj) {
       var sc = subjClass[subj.id] || '';
       html += '<div id="' + subj.id + '" class="subject-heading ' + sc + '">';
+      html += '<span class="subj-chip">' + getSubjectIcon(subj.id) + '</span>';
       html += esc(subj.subject);
       html += '</div>';
       subj.categories.forEach(function(section) {
