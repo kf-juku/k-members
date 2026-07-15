@@ -1103,6 +1103,12 @@ body {
 .gg-unit-name { font-size: 13px; color: var(--text); font-weight: 600; line-height: 1.35; flex: 1; }
 .gg-unit-btns { display: flex; gap: 6px; flex: 0 0 auto; }
 .gg-unit-btns .pt-btn { width: auto; min-width: 52px; padding: 7px 14px; }
+.pt-btn.s { background: var(--kf-navy-pale); color: var(--kf-navy); }
+.pt-btn.s:hover { background: var(--kf-navy-ultra); }
+/* ぐるぐる：3ボタン（問題・並び替え・解説）は単元名を上段、ボタンを下段フル幅に */
+.gg-unit-row.gg3 { flex-direction: column; align-items: stretch; gap: 6px; }
+.gg-unit-row.gg3 .gg-unit-btns { width: 100%; }
+.gg-unit-row.gg3 .gg-unit-btns .pt-btn { flex: 1 1 0; min-width: 0; padding: 8px 4px; }
 
 /* ========== 学年別ボタン（横並び） ========== */
 .grade-btn-row {
@@ -1321,6 +1327,14 @@ body {
             お知らせ・更新情報
           </div>
           <div class="bell-menu-list">
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-07-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">ぐるぐる英作文（中1〜中3）を追加しました。単元ごとに問題・並び替え・解説が開けます。</div>
+            </div>
             <div class="info-item">
               <div class="info-item-top">
                 <span class="info-date">2026-07-15</span>
@@ -1766,12 +1780,45 @@ var FILES = {
         },
         {
           category: 'ぐるぐる英作文',
-          desc: '単元ごとに繰り返し練習できるプリントです。',
+          desc: '単元ごとに繰り返し練習できるプリントです。問題・並び替え・解説が開けます。',
           guruguru: true,
+          prefix: 'pdf/seito/english/',
+          noTiming: true,
+          ansLabel: '解説',
+          ansSuffix: '_解説.pdf',
           grades: [
-            { grade: '中1', units: [] },
-            { grade: '中2', units: [] },
-            { grade: '中3', units: [] },
+            { grade: '中1', units: [
+              { name: 'be動詞', f: '英作文_中1_05_be動詞', s: true },
+              { name: '一般動詞（I・You・複数形）', f: '英作文_中1_10_一般動詞（I・You・複数形）', s: true },
+              { name: 'be動詞と一般動詞（doのみ）', f: '英作文_中1_15_be動詞と一般動詞（doのみ）', s: true },
+              { name: 'can', f: '英作文_中1_20_can', s: true },
+              { name: 'be動詞と一般動詞', f: '英作文_中1_25_be動詞と一般動詞', s: true },
+              { name: '疑問詞を使った文', f: '英作文_中1_30_疑問詞を使った文', s: true },
+              { name: '不定詞・動名詞', f: '英作文_中1_35_不定詞・動名詞', s: true },
+            ] },
+            { grade: '中2', units: [
+              { name: 'be動詞と一般動詞（規則動詞のみ）', f: '英作文_中2_05_be動詞と一般動詞（規則動詞のみ）', s: true },
+              { name: 'be動詞と一般動詞（不規則動詞）', f: '英作文_中2_10_be動詞と一般動詞（不規則動詞）', s: true },
+              { name: '疑問詞を使った文（過去形）', f: '英作文_中2_15_疑問詞を使った文（過去形）', s: true },
+              { name: '未来形', f: '英作文_中2_20_未来形', s: true },
+              { name: '接続詞その1（and,but,or,so）', f: '英作文_中2_25_接続詞その1（and,but,or,so）', s: true },
+              { name: '接続詞その2', f: '英作文_中2_30_接続詞その2', s: true },
+              { name: '助動詞その1（may,must,have to,should）', f: '英作文_中2_35_助動詞その1（may,must,have to,should）', s: true },
+              { name: '助動詞その2（May I,Shall I,would,could）', f: '英作文_中2_40_助動詞その2（May I,Shall I,would,could）', s: true },
+              { name: '疑問詞＋to', f: '英作文_中2_45_疑問詞＋to', s: true },
+              { name: '不定詞その1（名詞的用法）', f: '英作文_中2_50_不定詞その1（名詞的用法）', s: true },
+              { name: '不定詞その2（副詞的・形容詞的用法）', f: '英作文_中2_55_不定詞その2（副詞的・形容詞的用法）', s: true },
+              { name: '動名詞', f: '英作文_中2_60_動名詞', s: true },
+              { name: '比較級', f: '英作文_中2_65_比較級', s: true },
+            ] },
+            { grade: '中3', units: [
+              { name: '受け身・現在完了（経験用法）', f: '英作文_中3_05_受け身・現在完了（経験用法）', s: true },
+              { name: '現在完了（経験用法・完了用法）', f: '英作文_中3_10_現在完了（経験用法・完了用法）', s: true },
+              { name: '現在完了（継続用法・現在完了進行形）', f: '英作文_中3_15_現在完了（継続用法・現在完了進行形）', s: true },
+              { name: 'It is for to・want人to・help・let', f: '英作文_中3_20_It is for to・want人to・help・let', s: true },
+              { name: '間接疑問文', f: '英作文_中3_25_間接疑問文', s: true },
+              { name: '現在分詞', f: '英作文_中3_30_現在分詞', s: false },
+            ] },
           ]
         },
       ]
@@ -1987,30 +2034,41 @@ function renderPretestSection(section) {
 
 function renderGururuSection(section) {
   var TIMING_ORDER = ['前期中間','前期期末','後期中間','学年末'];
-  var PREFIX = 'pdf/seito/math/';
+  var PREFIX = section.prefix || 'pdf/seito/math/';
+  var noTiming = !!section.noTiming;
+  var ansLabel = section.ansLabel || '解答';
+  var ansSuffix = section.ansSuffix || '_解答.pdf';
   var html = '';
+  function renderUnit(g, u) {
+    var hasS = !!u.s;
+    var out = '<div class="gg-unit-row' + (hasS ? ' gg3' : '') + '">';
+    out += '<div class="gg-unit-name">' + esc(u.name) + '</div>';
+    out += '<div class="gg-unit-btns">';
+    out += '<button class="pt-btn q" onclick="openPdf(\'' + PREFIX + u.f + '_問題.pdf\', false, \'' + esc(g.grade + ' ' + u.name + ' 問題') + '\')">問題</button>';
+    if (hasS) {
+      out += '<button class="pt-btn s" onclick="openPdf(\'' + PREFIX + u.f + '_並び替え.pdf\', false, \'' + esc(g.grade + ' ' + u.name + ' 並び替え') + '\')">並び替え</button>';
+    }
+    out += '<button class="pt-btn a" onclick="openPdf(\'' + PREFIX + u.f + ansSuffix + '\', false, \'' + esc(g.grade + ' ' + u.name + ' ' + ansLabel) + '\')">' + esc(ansLabel) + '</button>';
+    out += '</div></div>';
+    return out;
+  }
   section.grades.forEach(function(g) {
     html += '<div class="pt-grade-acc">';
     html += '<button class="pt-grade-btn" onclick="togglePtGrade(this)">' + esc(g.grade) + '<span class="pt-arrow">▼</span></button>';
     html += '<div class="pt-grade-body">';
     if (!g.units || g.units.length === 0) {
       html += '<div style="color:#bbb;font-size:13px;padding:8px 4px;">準備中です。もうしばらくお待ちください。</div>';
+    } else if (noTiming) {
+      html += '<div class="pt-term-card">';
+      g.units.forEach(function(u) { html += renderUnit(g, u); });
+      html += '</div>';
     } else {
       TIMING_ORDER.forEach(function(term) {
         var us = g.units.filter(function(u){ return u.t === term; });
         if (us.length === 0) return;
         html += '<div class="pt-term-card">';
         html += '<div class="pt-term-title">' + esc(term) + '</div>';
-        us.forEach(function(u) {
-          var qpath = PREFIX + u.f + '_問題.pdf';
-          var apath = PREFIX + u.f + '_解答.pdf';
-          html += '<div class="gg-unit-row">';
-          html += '<div class="gg-unit-name">' + esc(u.name) + '</div>';
-          html += '<div class="gg-unit-btns">';
-          html += '<button class="pt-btn q" onclick="openPdf(\'' + qpath + '\', false, \'' + esc(g.grade + ' ' + u.name + ' 問題') + '\')">問題</button>';
-          html += '<button class="pt-btn a" onclick="openPdf(\'' + apath + '\', false, \'' + esc(g.grade + ' ' + u.name + ' 解答') + '\')">解答</button>';
-          html += '</div></div>';
-        });
+        us.forEach(function(u) { html += renderUnit(g, u); });
         html += '</div>';
       });
     }
