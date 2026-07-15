@@ -1093,6 +1093,12 @@ body {
 .pt-btn.q:hover { background: var(--kf-navy-mid); }
 .pt-btn.a { background: var(--kf-navy-ultra); color: var(--kf-navy); border: 1px solid var(--border); }
 .pt-btn.a:hover { background: var(--kf-navy-pale); }
+/* ぐるぐる：単元行（問題・解答2ボタン） */
+.gg-unit-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 2px; border-bottom: 1px solid var(--border); }
+.gg-unit-row:last-child { border-bottom: none; }
+.gg-unit-name { font-size: 13px; color: var(--text); font-weight: 600; line-height: 1.35; flex: 1; }
+.gg-unit-btns { display: flex; gap: 6px; flex: 0 0 auto; }
+.gg-unit-btns .pt-btn { width: auto; min-width: 52px; padding: 7px 14px; }
 
 /* ========== 学年別ボタン（横並び） ========== */
 .grade-btn-row {
@@ -1768,9 +1774,56 @@ var FILES = {
           desc: '単元ごとに繰り返し練習できるプリントです。',
           guruguru: true,
           grades: [
-            { grade: '中1', units: [] },
-            { grade: '中2', units: [] },
-            { grade: '中3', units: [] },
+            { grade: '中1', units: [
+              { t: '前期中間', name: '小学校の復習', f: '数学_中1_05_小学校の復習' },
+              { t: '前期中間', name: '正の数・負の数まで', f: '数学_中1_10_正の数・負の数まで' },
+              { t: '前期中間', name: '数の大小まで', f: '数学_中1_15_数の大小まで' },
+              { t: '前期中間', name: '加法・減法まで', f: '数学_中1_20_加法・減法まで' },
+              { t: '前期中間', name: '乗法・除法まで', f: '数学_中1_25_乗法・除法まで' },
+              { t: '前期中間', name: '1章まで①', f: '数学_中1_30_1章まで①' },
+              { t: '前期中間', name: '1章まで②', f: '数学_中1_35_1章まで②' },
+              { t: '前期中間', name: '文字の表し方・代入', f: '数学_中1_40_文字の表し方・代入' },
+              { t: '前期中間', name: '数量の表し方', f: '数学_中1_45_数量の表し方' },
+              { t: '前期期末', name: '文字式の計算まで', f: '数学_中1_50_文字式の計算まで' },
+              { t: '前期期末', name: '２章 文字式の利用', f: '数学_中1_55_２章 文字式の利用' },
+              { t: '前期期末', name: '一次方程式の計算キソ', f: '数学_中1_60_一次方程式の計算キソ' },
+              { t: '前期期末', name: '一次方程式の計算', f: '数学_中1_65_一次方程式の計算' },
+              { t: '前期期末', name: '３章 方程式の利用', f: '数学_中1_70_３章 方程式の利用' },
+              { t: '後期中間', name: '比例', f: '数学_中1_75_比例' },
+              { t: '後期中間', name: '比例・反比例', f: '数学_中1_80_比例・反比例' },
+              { t: '学年末', name: '図形の作図（垂直二等分線・角の二等分線・垂線）', f: '数学_中1_85_図形の作図（垂直二等分線・角の二等分線・垂線）' },
+              { t: '学年末', name: '図形の作図', f: '数学_中1_90_図形の作図' },
+              { t: '学年末', name: '立体の体積・表面積', f: '数学_中1_95_立体の体積・表面積' },
+              { t: '学年末', name: 'おうぎ形', f: '数学_中1_100_おうぎ形' },
+              { t: '学年末', name: '球の体積・表面積', f: '数学_中1_105_球の体積・表面積' },
+            ] },
+            { grade: '中2', units: [
+              { t: '前期中間', name: '中1の復習', f: '数学_中2_05_中1の復習' },
+              { t: '前期中間', name: '単項式と多項式・次数・同類項', f: '数学_中2_10_単項式と多項式・次数・同類項' },
+              { t: '前期中間', name: '多項式の加減', f: '数学_中2_15_多項式の加減' },
+              { t: '前期中間', name: '多項式のいろいろな計算・分配法則・分数', f: '数学_中2_20_多項式のいろいろな計算・分配法則・分数' },
+              { t: '前期中間', name: '単項式の乗除・式の値', f: '数学_中2_25_単項式の乗除・式の値' },
+              { t: '前期中間', name: '1章まで', f: '数学_中2_30_1章まで' },
+              { t: '前期期末', name: '２章 連立方程式のキソ', f: '数学_中2_35_２章 連立方程式のキソ' },
+              { t: '前期期末', name: '２章 連立方程式', f: '数学_中2_40_２章 連立方程式' },
+              { t: '前期期末', name: '連立方程式の応用', f: '数学_中2_45_連立方程式の応用' },
+              { t: '後期中間', name: '３章 一次関数 その1', f: '数学_中2_50_３章 一次関数 その1' },
+              { t: '後期中間', name: '３章 一次関数 その2', f: '数学_中2_55_３章 一次関数 その2' },
+              { t: '学年末', name: '角の性質・三角形の内角・外角', f: '数学_中2_60_角の性質・三角形の内角・外角' },
+              { t: '学年末', name: '求角① ちょうちょ・ブーメラン・星', f: '数学_中2_65_求角① ちょうちょ・ブーメラン・星' },
+              { t: '学年末', name: '求角② 折り返し・●〇', f: '数学_中2_70_求角② 折り返し・●〇' },
+              { t: '学年末', name: '合同の証明', f: '数学_中2_75_合同の証明' },
+            ] },
+            { grade: '中3', units: [
+              { t: '前期中間', name: '中1・2の復習', f: '数学_中3_05_中1・2の復習' },
+              { t: '前期中間', name: '多項式と単項式の乗除', f: '数学_中3_10_多項式と単項式の乗除' },
+              { t: '前期中間', name: '式の展開', f: '数学_中3_15_式の展開' },
+              { t: '前期中間', name: '因数分解 その1', f: '数学_中3_20_因数分解 その1' },
+              { t: '前期中間', name: '因数分解 その2', f: '数学_中3_25_因数分解 その2' },
+              { t: '前期期末', name: '平方根', f: '数学_中3_30_平方根' },
+              { t: '前期期末', name: '二次方程式', f: '数学_中3_35_二次方程式' },
+              { t: '後期中間', name: '二次関数', f: '数学_中3_40_二次関数' },
+            ] },
           ]
         },
       ]
@@ -1828,7 +1881,7 @@ var QM_ICONS = {'NEW HORIZON 教科書和訳':'<svg viewBox="0 0 24 24" class="q
 // カテゴリにPDFが1つでもあるか（なければクイックメニューでグレーアウト）
 function categoryHasPdf(section){
   if (section.guruguru) {
-    return (section.grades||[]).some(function(g){ return (g.units||[]).some(function(u){ return u && u.path; }); });
+    return (section.grades||[]).some(function(g){ return (g.units||[]).length > 0; });
   }
   if (section.pretest) {
     return (section.grades||[]).some(function(g){ return (g.terms||[]).some(function(t){ return t && t.base; }); });
@@ -1921,21 +1974,32 @@ function renderPretestSection(section) {
 }
 
 function renderGururuSection(section) {
+  var TIMING_ORDER = ['前期中間','前期期末','後期中間','学年末'];
+  var PREFIX = 'pdf/seito/math/';
   var html = '';
-  section.grades.forEach(function(g, gi) {
-    var bodyId = 'gg-' + gi + '-' + Math.random().toString(36).slice(2,6);
+  section.grades.forEach(function(g) {
     html += '<div class="pt-grade-acc">';
     html += '<button class="pt-grade-btn" onclick="togglePtGrade(this)">' + esc(g.grade) + '<span class="pt-arrow">▼</span></button>';
     html += '<div class="pt-grade-body">';
     if (!g.units || g.units.length === 0) {
       html += '<div style="color:#bbb;font-size:13px;padding:8px 4px;">準備中です。もうしばらくお待ちください。</div>';
     } else {
-      g.units.forEach(function(u) {
-        html += '<div class="file-card">';
-        html += '<div class="file-info"><div class="file-name">' + esc(u.name) + '</div></div>';
-        html += '<div class="file-actions">';
-        html += '<button class="btn-open" onclick="openPdf(\'' + u.path + '\', false, \'' + esc(g.grade + ' ' + u.name) + '\')">開く</button>';
-        html += '</div></div>';
+      TIMING_ORDER.forEach(function(term) {
+        var us = g.units.filter(function(u){ return u.t === term; });
+        if (us.length === 0) return;
+        html += '<div class="pt-term-card">';
+        html += '<div class="pt-term-title">' + esc(term) + '</div>';
+        us.forEach(function(u) {
+          var qpath = PREFIX + u.f + '_問題.pdf';
+          var apath = PREFIX + u.f + '_解答.pdf';
+          html += '<div class="gg-unit-row">';
+          html += '<div class="gg-unit-name">' + esc(u.name) + '</div>';
+          html += '<div class="gg-unit-btns">';
+          html += '<button class="pt-btn q" onclick="openPdf(\'' + qpath + '\', false, \'' + esc(g.grade + ' ' + u.name + ' 問題') + '\')">問題</button>';
+          html += '<button class="pt-btn a" onclick="openPdf(\'' + apath + '\', false, \'' + esc(g.grade + ' ' + u.name + ' 解答') + '\')">解答</button>';
+          html += '</div></div>';
+        });
+        html += '</div>';
       });
     }
     html += '</div></div>';
