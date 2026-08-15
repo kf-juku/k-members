@@ -1329,6 +1329,22 @@ body {
           <div class="bell-menu-list">
             <div class="info-item">
               <div class="info-item-top">
+                <span class="info-date">2026-08-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">前期期末プレテストにリスニング音声を追加しました（中1〜中3）。英語の「問題」から再生できます。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-08-15</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">前期期末プレテスト（中1〜中3・英語／数学／理科／社会）を追加しました。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
                 <span class="info-date">2026-07-15</span>
                 <span class="info-badge new">NEW</span>
                 <span class="info-tab-badge seito">生徒向け</span>
@@ -1717,6 +1733,9 @@ var PLAYER_PAGES = {
   '中2_前期中間_english': 'pretest-english-grade2-term1.html',
   '中3_前期中間_english': 'pretest-english-grade3-term1.html',
   '中1_前期中間_english': 'pretest-english-grade1-term1.html',
+  '中1_前期期末_english': 'pretest-english-grade1-term2.html',
+  '中2_前期期末_english': 'pretest-english-grade2-term2.html',
+  '中3_前期期末_english': 'pretest-english-grade3-term2.html',
 };
 
 // ========== ファイルデータ ==========
@@ -1900,7 +1919,7 @@ var FILES = {
             {
               grade: '中1', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade1-term1' },
-                { term: '前期期末', base: '' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade1-term2' },
                 { term: '後期中間', base: '' },
                 { term: '学年末',   base: '' },
               ]
@@ -1908,7 +1927,7 @@ var FILES = {
             {
               grade: '中2', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade2-term1' },
-                { term: '前期期末', base: '' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade2-term2' },
                 { term: '後期中間', base: '' },
                 { term: '学年末',   base: '' },
               ]
@@ -1916,7 +1935,7 @@ var FILES = {
             {
               grade: '中3', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade3-term1' },
-                { term: '前期期末', base: '' },
+                { term: '前期期末', base: 'pdf/seito/pretest-grade3-term2' },
                 { term: '後期中間', base: '' },
               ]
             },
