@@ -2246,6 +2246,41 @@ function switchTab(tab) {
     document.getElementById('panel' + cap).classList.toggle('active', t === tab);
     document.getElementById('tabBtn' + cap).classList.toggle('active', t === tab);
   });
+  // 2026-08-15：最後に見ていたタブを記憶（次回そのタブで開く）
+  try { localStorage.setItem('lib_tab', tab); } catch (e) {}
+}
+
+// ========== タブ復元・戻り先ジャンプ（2026-08-15 追加） ==========
+// プレイヤーページ等から index.html?tab=seito&to=プレテスト&grade=中2 で戻ってきたとき、
+// 生徒タブに切り替え → 該当カテゴリの学年アコーディオンを開く → その位置までスクロールする。
+// クエリが無いときは localStorage の 'lib_tab'（最後に見ていたタブ）を復元するだけ。
+function getQueryParams() {
+  var q = {};
+  location.search.replace(/^\?/, '').split('&').forEach(function(kv) {
+    if (!kv) return;
+    var i = kv.indexOf('=');
+    var k = i < 0 ? kv : kv.slice(0, i);
+    var v = i < 0 ? '' : kv.slice(i + 1);
+    try { q[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); } catch (e) {}
+  });
+  return q;
+}
+
+function restoreTabAndTarget() {
+  var q = getQueryParams();
+  var tab = q.tab || localStorage.getItem('lib_tab');
+  if (tab === 'hogo' || tab === 'seito') switchTab(tab);
+  if (!q.to) return;
+  var sec = document.getElementById(catAnchorId(q.to));
+  if (!sec) return;
+  if (q.grade) {
+    var btns = sec.querySelectorAll('.pt-grade-btn');
+    for (var i = 0; i < btns.length; i++) {
+      var name = (btns[i].textContent || '').replace(/[\u25bc\u25b2\s]/g, '');
+      if (name === q.grade && !btns[i].classList.contains('open')) togglePtGrade(btns[i]);
+    }
+  }
+  sec.scrollIntoView({ block: 'start' });
 }
 
 // ========== PDF表示 ==========
@@ -2271,6 +2306,7 @@ window.addEventListener('DOMContentLoaded', function() {
   var devMode = location.search.indexOf('dev') !== -1;
   if (devMode || localStorage.getItem('lib_auth') === '1') {
     showMain();
+    restoreTabAndTarget();
   }
 });
 </script>

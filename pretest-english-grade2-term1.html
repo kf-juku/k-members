@@ -45,19 +45,23 @@ body {
 .header-title { font-size: 14px; font-weight: bold; }
 .header-sub { font-size: 11px; opacity: 0.65; margin-top: 2px; }
 .back-btn {
-  font-size: 12px;
-  color: rgba(255,255,255,0.85);
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 7px;
-  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--navy);
+  background: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 8px;
+  padding: 10px 16px;
   cursor: pointer;
   font-family: inherit;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
 }
+.back-btn:hover { background: var(--navy-pale); }
 
 /* メイン */
 .wrap {
@@ -247,7 +251,7 @@ audio { display: none; }
       <div class="header-title">進学塾クロフネ</div>
       <div class="header-sub">塾生専用ページ</div>
     </div>
-    <a class="back-btn" href="javascript:history.back()">← 戻る</a>
+    <a class="back-btn" href="index.html?tab=seito&amp;to=プレテスト&amp;grade=中2">← プレテスト一覧</a>
   </div>
 </header>
 
