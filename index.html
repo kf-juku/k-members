@@ -1097,6 +1097,20 @@ body {
 .pt-btn.q:hover { background: var(--kf-navy-mid); }
 .pt-btn.a { background: var(--kf-navy-ultra); color: var(--kf-navy); border: 1px solid var(--border); }
 .pt-btn.a:hover { background: var(--kf-navy-pale); }
+.pt-btn[disabled] { background: #e5e7eb; color: #bbb; border: none; cursor: not-allowed; transform: none; }
+.pt-soon { font-size: 10px; color: #aaa; text-align: center; }
+.pt-pick { font-size: 10px; color: var(--kf-navy); font-weight: bold; text-align: center; padding: 8px 0; }
+/* 範囲が2パターン以上ある教科（2026-11-11） */
+.pt-var { margin-top: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
+.pt-var-head { font-size: 11px; font-weight: bold; color: var(--kf-navy); margin-bottom: 6px; }
+.pt-var-head span { font-weight: normal; color: var(--text-muted); }
+.pt-var-row { display: flex; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.pt-var-info { flex: 1; min-width: 0; }
+.pt-var-label { font-size: 12px; font-weight: bold; color: var(--kf-navy); }
+.pt-var-range { font-size: 11px; color: #444; line-height: 1.5; margin-top: 2px; }
+.pt-var-btns { display: flex; gap: 4px; flex-shrink: 0; }
+.pt-var-btns .pt-btn { width: auto; min-width: 48px; padding: 8px 10px; }
+@media (max-width: 420px) { .pt-var-row { flex-direction: column; align-items: stretch; } .pt-var-btns .pt-btn { flex: 1; } }
 /* ぐるぐる：単元行（問題・解答2ボタン） */
 .gg-unit-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 2px; border-bottom: 1px solid var(--border); }
 .gg-unit-row:last-child { border-bottom: none; }
@@ -1327,6 +1341,22 @@ body {
             お知らせ・更新情報
           </div>
           <div class="bell-menu-list">
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-11-11</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">中1・中2 後期中間プレテストにリスニング音声を追加しました。英語の「問題」から再生できます。</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-top">
+                <span class="info-date">2026-11-11</span>
+                <span class="info-badge new">NEW</span>
+                <span class="info-tab-badge seito">生徒向け</span>
+              </div>
+              <div class="info-text">中1・中2 後期中間プレテスト（英語／数学／社会）を追加しました。中2の英語は学校のテスト範囲に合わせて2種類あります。理科は準備中です。</div>
+            </div>
             <div class="info-item">
               <div class="info-item-top">
                 <span class="info-date">2026-10-28</span>
@@ -1753,6 +1783,7 @@ var PLAYER_PAGES = {
   '中2_前期期末_english': 'pretest-english-grade2-term2.html',
   '中3_前期期末_english': 'pretest-english-grade3-term2.html',
   '中3_後期中間_english': 'pretest-english-grade3-term3.html',
+  '中1_後期中間_english': 'pretest-english-grade1-term3.html',
 };
 
 // ========== ファイルデータ ==========
@@ -1937,7 +1968,7 @@ var FILES = {
               grade: '中1', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade1-term1' },
                 { term: '前期期末', base: 'pdf/seito/pretest-grade1-term2' },
-                { term: '後期中間', base: '' },
+                { term: '後期中間', base: 'pdf/seito/pretest-grade1-term3', soon: ['science'] },
                 { term: '学年末',   base: '' },
               ]
             },
@@ -1945,7 +1976,13 @@ var FILES = {
               grade: '中2', terms: [
                 { term: '前期中間', base: 'pdf/seito/pretest-grade2-term1' },
                 { term: '前期期末', base: 'pdf/seito/pretest-grade2-term2' },
-                { term: '後期中間', base: '' },
+                // soon: まだPDFが無い教科（その教科だけ「準備中」で押せない）
+                // variants: 範囲が2パターン以上ある教科。PDFは base-教科-id-q.pdf / -a.pdf。player はリスニングのページ（無ければPDFを直接開く）
+                { term: '後期中間', base: 'pdf/seito/pretest-grade2-term3', soon: ['science'],
+                  variants: { english: [
+                    { id: 'p1', label: '比較級（er, est）が出る人', range: 'ほかの範囲：不定詞・動名詞／助動詞・疑問詞＋to', player: 'pretest-english-grade2-term3-p1.html' },
+                    { id: 'p2', label: 'tell＋人＋疑問詞＋to が出る人', range: 'ほかの範囲：疑問詞＋to／不定詞・助動詞・動名詞', player: 'pretest-english-grade2-term3-p2.html' },
+                  ] } },
                 { term: '学年末',   base: '' },
               ]
             },
@@ -2045,9 +2082,23 @@ function renderPretestSection(section) {
           html += '<div style="color:#bbb;font-size:11px;margin-top:4px;">準備中</div>';
         } else {
           html += '<div class="pt-btn-grid">';
+          var soon = t.soon || [];
+          var variants = t.variants || {};
           subjects.forEach(function(s) {
             html += '<div class="pt-subject">';
             html += '<div class="pt-subject-name">' + esc(s.label) + '</div>';
+            if (soon.indexOf(s.key) >= 0) {
+              html += '<button class="pt-btn q" disabled>問題</button>';
+              html += '<button class="pt-btn a" disabled>解答</button>';
+              html += '<div class="pt-soon">準備中</div>';
+              html += '</div>';
+              return;
+            }
+            if (variants[s.key]) {
+              html += '<div class="pt-pick">下から選ぶ</div>';
+              html += '</div>';
+              return;
+            }
             var playerKey = g.grade + '_' + t.term + '_' + s.key;
             var playerUrl = PLAYER_PAGES[playerKey];
             if (playerUrl) {
@@ -2059,6 +2110,28 @@ function renderPretestSection(section) {
             html += '</div>';
           });
           html += '</div>';
+          subjects.forEach(function(s) {
+            var vs = variants[s.key];
+            if (!vs || soon.indexOf(s.key) >= 0) return;
+            html += '<div class="pt-var">';
+            html += '<div class="pt-var-head">' + esc(s.label) + ' <span>── 学校のテスト範囲で選んでください</span></div>';
+            vs.forEach(function(v) {
+              var pb = t.base + '-' + s.key + '-' + v.id;
+              var nm = g.grade + ' ' + t.term + ' ' + s.label + '（' + v.label + '）';
+              html += '<div class="pt-var-row"><div class="pt-var-info">';
+              html += '<div class="pt-var-label">' + esc(v.label) + '</div>';
+              if (v.range) html += '<div class="pt-var-range">' + esc(v.range) + '</div>';
+              html += '</div><div class="pt-var-btns">';
+              if (v.player) {
+                html += '<button class="pt-btn q" onclick="location.href=\'' + v.player + '\'">問題</button>';
+              } else {
+                html += '<button class="pt-btn q" onclick="openPdf(\'' + pb + '-q.pdf\', false, \'' + esc(nm + ' 問題') + '\')">問題</button>';
+              }
+              html += '<button class="pt-btn a" onclick="openPdf(\'' + pb + '-a.pdf\', false, \'' + esc(nm + ' 解答') + '\')">解答</button>';
+              html += '</div></div>';
+            });
+            html += '</div>';
+          });
         }
         html += '</div>';
       });
